@@ -148,7 +148,7 @@ function IndexPopup() {
         </div>
       </div>
       <div className="flex mt-4 items-center">
-        <div className="px-2 py-3 rounded-lg text-sm font-semibold bg-gray-200 text-nowrap overflow-x-scroll">
+        <div className="px-2 py-3 w-full rounded-lg text-sm font-semibold bg-gray-200 text-nowrap overflow-x-scroll">
           {copyText}
         </div>
         <div className="h-full ml-2 my-auto text-2xl">

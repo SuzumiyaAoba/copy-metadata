@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "package": "plasmo package",
+    "icon:1024": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon.png resize 1024",
+    "icon:128": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon128.png resize 128"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.8.2",
@@ -44,7 +46,6 @@
       "contextMenus",
       "tabs",
       "activeTab",
-      "scripting",
       "clipboardWrite"
     ],
     "action": {}
