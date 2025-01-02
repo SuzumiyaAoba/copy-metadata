@@ -8,6 +8,7 @@
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package",
+    "format": "prettier . --write",
     "icon:1024": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon.png resize 1024",
     "icon:128": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon128.png resize 128"
   },
