@@ -22,7 +22,7 @@ export function createEnvFromDocument(document: Document): Env {
 export function evalTemplate(template: string, env: Env): string | undefined {
   try {
     return Mustache.render(template, env);
-  } catch (e) {
+  } catch (_e) {
     return undefined;
   }
 }

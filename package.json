@@ -8,9 +8,11 @@
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package",
-    "format": "prettier . --write",
+    "format:prettier": "prettier . --write",
+    "format:eslint": "eslint --fix",
     "icon:1024": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon.png resize 1024",
-    "icon:128": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon128.png resize 128"
+    "icon:128": "npx sharp-cli --input ./assets/icon.svg --output ./assets/icon128.png resize 128",
+    "prepare": "husky"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.8.2",
@@ -26,6 +28,7 @@
     "use-click-outside": "^2.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@iconify/json": "^2.2.290",
     "@types/chrome": "0.0.258",
@@ -34,10 +37,23 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.3",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
     "postcss": "^8.4.49",
     "prettier": "3.2.4",
     "tailwindcss": "^3.4.17",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "typescript-eslint": "^8.19.0"
+  },
+  "lint-staged": {
+    "!(*.ts)": "prettier --write .",
+    "*.ts": [
+      "prettier --write .",
+      "eslint --fix"
+    ]
   },
   "manifest": {
     "host_permissions": [

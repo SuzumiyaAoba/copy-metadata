@@ -15,7 +15,7 @@ export function sendMessage(tabId: number, message: Message) {
 }
 
 export function sendCopyTextMessage(
-  callback: (tab: chrome.tabs.Tab) => string
+  callback: (_tab: chrome.tabs.Tab) => string
 ): void {
   activeTabCallback((tab) =>
     sendMessage(tab.id, { type: "copy", text: callback(tab) })
@@ -32,7 +32,7 @@ export function clipboardWriteText(text: string) {
 
 function main() {
   chrome.runtime.onMessage.addListener(
-    (message: Message, sender, sendResponse) => {
+    (message: Message, _sender, _sendResponse) => {
       if (message.type === "copy") {
         navigator.clipboard.writeText(message.text).then(
           () => {},

@@ -71,7 +71,7 @@ function main() {
     createMenus(DefaultMenu);
   });
 
-  chrome.contextMenus.onClicked.addListener((info, tab) => {
+  chrome.contextMenus.onClicked.addListener((info, _tab) => {
     switch (info.menuItemId) {
       case "Copy URL":
         sendCopyTextMessageUsingTemplate(Templates.url);

@@ -7,13 +7,13 @@ import { DefaultConfig, type Config } from "./config";
 
 const KEY = "copy-metadata";
 
-export type DraftFunction<S> = (draft: Draft<S>) => void;
-export type Updater<S> = (arg: S | DraftFunction<S>) => void;
+export type DraftFunction<S> = (_draft: Draft<S>) => void;
+export type Updater<S> = (_arg: S | DraftFunction<S>) => void;
 export type ImmerHook<S> = [S, Updater<S>];
 
-function useImmerStorage<S = any>(
-  key: RawKey,
-  initialValue: S | (() => S)
+function useImmerStorage<S = unknown>(
+  _key: RawKey,
+  _initialValue: S | (() => S)
 ): ImmerHook<S>;
 
 function useImmerStorage(key, initialValue) {
@@ -42,9 +42,9 @@ export function useConfig() {
   return useImmerStorage<Config>(KEY, DefaultConfig);
 }
 
-export function useDebounce<T extends any>(
+export function useDebounce<T = unknown>(
   value: T,
-  condtion: (value: T) => boolean,
+  condtion: (_value: T) => boolean,
   delay: number
 ) {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);

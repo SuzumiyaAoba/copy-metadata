@@ -69,9 +69,12 @@ function IndexPopup() {
     if (next) {
       setIsVisible(true);
     } else {
-      setTimeout(() => {
-        setIsVisible(false);
-      }, props?.delay as number);
+      setTimeout(
+        () => {
+          setIsVisible(false);
+        },
+        props?.delay as number // eslint-disable-line react/prop-types
+      );
     }
 
     springOpacity.start(next ? 1 : 0, props);
@@ -86,7 +89,7 @@ function IndexPopup() {
     "click"
   );
 
-  useMessage<string, undefined>((req, res) => {
+  useMessage<string, undefined>((req, _res) => {
     if (req.name === "popup") {
       toggleVisible();
     }
