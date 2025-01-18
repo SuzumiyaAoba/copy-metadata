@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useConfig } from "@/libs/hooks/config";
 import { evalTemplate, type Env } from "@/libs/template";
 import { BuiltInTemplates } from "@/libs/config";
+import { Button } from "@/components/ui/button";
 
 export function TemplateEditor() {
   const [config, updateConfig] = useConfig();
@@ -51,55 +52,43 @@ export function TemplateEditor() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Templates</h2>
-          <p className="mt-1 text-sm text-gray-500">
+          <h2 className="text-xl font-bold text-purple-900">Templates</h2>
+          <p className="mt-1 text-sm text-purple-600">
             Customize the format of copied text
           </p>
         </div>
-        <button
-          onClick={handleResetTemplates}
-          className="text-sm px-4 py-2 text-gray-600 hover:text-gray-800 border rounded-lg hover:bg-gray-50 transition-colors"
-        >
-          Reset to Default
-        </button>
+        <Button variant="secondary">Reset to Default</Button>
       </div>
 
       <form onSubmit={handleAddTemplate} className="flex gap-3">
         <input
-          className="flex-grow px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+          className="flex-grow px-3 py-2 rounded-lg border border-purple-200 shadow-sm 
+                   focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow"
           value={newTemplateName}
           onChange={(e) => setNewTemplateName(e.target.value)}
           placeholder="New template name"
         />
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          Add
-        </button>
+        <Button type="submit" variant="primary">Add</Button>
       </form>
 
       <div className="space-y-4">
         {Object.entries(config.templates).map(([name, { template }]) => (
-          <div key={name} className="bg-gray-50 rounded-lg p-4 space-y-3">
+          <div key={name} className="bg-purple-50 rounded-lg p-4 space-y-3 border border-purple-100">
             <div className="grid grid-cols-8 gap-3 items-center">
-              <label className="col-span-1 text-right font-medium text-gray-700">
+              <label className="col-span-1 text-right font-medium text-purple-900">
                 {name}
               </label>
               <input
-                className="col-span-6 px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+                className="col-span-6 px-3 py-2 rounded-lg border border-purple-200 shadow-sm 
+                         focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow"
                 value={template}
                 onChange={handleTemplateChange(name)}
               />
-              <button
-                onClick={() => handleDeleteTemplate(name)}
-                className="col-span-1 px-3 py-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-              >
-                Delete
-              </button>
+              <Button variant="danger" className="col-span-1">Delete</Button>
             </div>
             <div className="ml-[12.5%] w-[75%]">
-              <div className="px-3 py-2 bg-white rounded-lg border border-gray-200 text-sm text-gray-600 overflow-x-auto">
+              <div className="px-3 py-2 bg-white rounded-lg border border-purple-200 
+                           text-sm text-purple-900 overflow-x-auto">
                 {renderTemplate(template)}
               </div>
             </div>

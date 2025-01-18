@@ -7,7 +7,7 @@ import { cn } from "@/libs/utils";
 
 function MetadataDisplay({ env }: { env: Env }) {
   return (
-    <div className="space-y-2.5 bg-gray-50 rounded-lg p-3.5 border border-gray-100">
+    <div className="space-y-2.5 bg-purple-50 rounded-lg p-3.5 border border-purple-100">
       {Object.entries(env).map(([key, value]) => (
         <div key={key} className="flex">
           <span className="text-xs font-medium text-gray-500 w-12 text-right pr-2.5 pt-0.5">
@@ -31,10 +31,10 @@ function PreviewBox({ content }: { content: string }) {
   return (
     <div className="relative">
       <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
-        <span className="text-xs font-medium text-gray-500">Preview</span>
+        <span className="text-xs font-medium text-purple-600">Preview</span>
       </div>
-      <div className="px-3.5 py-2.5 text-sm font-medium text-gray-800 border rounded-lg bg-gray-50 
-                    overflow-x-auto whitespace-nowrap font-mono shadow-sm">
+      <div className="px-3.5 py-2.5 text-sm font-medium text-gray-800 border border-purple-200 
+                    rounded-lg bg-purple-50/50 overflow-x-auto whitespace-nowrap font-mono shadow-sm">
         {content}
       </div>
     </div>
@@ -78,12 +78,12 @@ export function Popup() {
   }, [activeTab, config]);
 
   return (
-    <div className="w-96 bg-white">
+    <div className="w-96 bg-gradient-to-b from-purple-50/50">
       <div className="p-4 space-y-4">
         <div className="flex gap-2">
           <select
-            className="flex-grow px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white shadow-sm 
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+            className="flex-grow px-3 py-2 text-sm rounded-lg border border-purple-200 bg-white shadow-sm 
+                     focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow"
             value={config.enabledTemplate.name}
             onChange={(e) => {
               const name = e.target.value;
