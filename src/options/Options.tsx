@@ -19,6 +19,16 @@ function Options() {
     });
   };
 
+  const handleEnabledTemplateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const templateName = e.target.value;
+    updateConfig((draft) => {
+      draft.enabledTemplate = {
+        name: templateName,
+        ...draft.templates[templateName],
+      };
+    });
+  };
+
   const handleTemplateChange =
     (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       updateConfig((draft) => {
@@ -33,13 +43,29 @@ function Options() {
     <div className="flex flex-col px-6 py-4 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold">Copy metadata</h1>
       <h2 className="text-lg font-bold mt-4">設定</h2>
-      <div className="flex mt-4 items-center">
-        <input
-          type="checkbox"
-          checked={config.copyOnIconClick}
-          onChange={handleCopyOnIconCheckboxChange}
-        />
-        <label className="ml-2">アイコンをクリックしてコピーを有効にする</label>
+      <div className="flex flex-col gap-4 mt-4">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            checked={config.copyOnIconClick}
+            onChange={handleCopyOnIconCheckboxChange}
+          />
+          <label className="ml-2">アイコンをクリックしてコピーを有効にする</label>
+        </div>
+        <div className="flex items-center">
+          <label className="mr-2">コピー時のテンプレート：</label>
+          <select 
+            value={config.enabledTemplate.name} 
+            onChange={handleEnabledTemplateChange}
+            className="px-2 py-1 rounded border shadow"
+          >
+            {Object.keys(config.templates).map((name) => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <h2 className="text-lg font-bold mt-4 mb-2">Templates</h2>
       <div className="grid grid-cols-8 gap-2 items-center">
