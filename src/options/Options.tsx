@@ -6,6 +6,7 @@ function Options() {
   return (
     <div className="flex flex-col px-6 py-4 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold">Copy metadata</h1>
+      <p className="text-gray-600 mb-4">カスタマイズ可能なテンプレートでメタデータをコピー</p>
       <CopySettings />
       <TemplateEditor />
     </div>
