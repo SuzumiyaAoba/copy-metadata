@@ -12,7 +12,7 @@ export type Templates = Record<
   }
 >;
 
-const BuiltInTemplates: Templates = {
+export const BuiltInTemplates: Templates = {
   URL: {
     template: "{{{ url }}}",
   },

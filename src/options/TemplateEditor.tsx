@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useConfig } from "@/libs/hooks/config";
 import { evalTemplate, type Env } from "@/libs/template";
+import { BuiltInTemplates } from "@/libs/config";
 
 export function TemplateEditor() {
   const [config, updateConfig] = useConfig();
@@ -38,9 +39,25 @@ export function TemplateEditor() {
     });
   };
 
+  const handleResetTemplates = () => {
+    if (window.confirm("テンプレートをデフォルトの状態に戻しますか？")) {
+      updateConfig((draft) => {
+        draft.templates = { ...BuiltInTemplates };
+      });
+    }
+  };
+
   return (
     <>
-      <h2 className="text-lg font-bold mt-4 mb-2">テンプレート</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-bold mt-4 mb-2">テンプレート</h2>
+        <button
+          onClick={handleResetTemplates}
+          className="text-sm px-3 py-1 text-gray-600 hover:text-gray-800 border rounded"
+        >
+          デフォルトに戻す
+        </button>
+      </div>
       <form onSubmit={handleAddTemplate} className="mb-4 flex gap-2">
         <input
           className="px-2 py-1 rounded border shadow flex-grow"
