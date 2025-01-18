@@ -5,7 +5,7 @@ import { useConfig } from "@/libs/hooks/config";
 import { useActiveTab } from "@/libs/hooks/tab";
 
 function Popup() {
-  const [config] = useConfig();
+  const [config, updateConfig] = useConfig();
   const [activeTab] = useActiveTab();
   const [currentEnv, setCurrentEnv] = useState<Env>({
     title: "",
@@ -26,6 +26,12 @@ function Popup() {
 
   const handleOpenOptions = async () => {
     chrome.runtime.openOptionsPage();
+  };
+
+  const handleTemplateChange = (name: string, template: string) => {
+    updateConfig((draft) => {
+      draft.enabledTemplate = { name, template };
+    });
   };
 
   useEffect(() => {
@@ -64,12 +70,29 @@ function Popup() {
                     overflow-hidden text-pretty
                   text-black text-lg"
     >
-      <button
-        className="mb-2 px-1 py-2 w-full text-sm font-bold rounded-full bg-black text-white"
-        onClick={handleOnCopyClick}
-      >
-        {copyButtonText}
-      </button>
+      <div className="flex gap-2 mb-2">
+        <select
+          className="flex-grow px-2 py-1 text-sm rounded border"
+          value={config.enabledTemplate.name}
+          onChange={(e) => {
+            const name = e.target.value;
+            const template = config.templates[name].template;
+            handleTemplateChange(name, template);
+          }}
+        >
+          {Object.entries(config.templates).map(([name]) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+        <button
+          className="px-1 py-2 flex-grow text-sm font-bold rounded-full bg-black text-white"
+          onClick={handleOnCopyClick}
+        >
+          {copyButtonText}
+        </button>
+      </div>
       <div className="flex flex-col gap-2 mt-4 text-sm">
         <div className="flex">
           <p className="mr-1">Title:</p>
