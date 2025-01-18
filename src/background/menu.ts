@@ -1,8 +1,5 @@
-import { sendToContentScript } from "@plasmohq/messaging";
-
-import { sendCopyTextMessageUsingTemplate } from "~contents";
-
-export {};
+import { sendCopyTextMessageUsingTemplate } from "../content";
+import { Templates } from "../libs/template";
 
 type ParentId = string | number;
 
@@ -12,41 +9,33 @@ type Menu = {
   children?: Menu[];
 };
 
-export const Templates = {
-  url: "{{{ url }}}",
-  title: "{{{ title }}}",
-  markdown: "[{{{ title }}}]({{{ url }}})",
-  org: "[[{{{ url }}}][{{{ title }}}]]",
-  asciidoc: "{{{ url }}}[{{{ title }}}]"
-};
-
-const DefaultMenu: Menu[] = [
+export const DefaultMenu: Menu[] = [
   {
     id: "Copy metadata",
     title: "Copy metadata",
     children: [
       {
         id: "Copy URL",
-        title: "URL"
+        title: "URL",
       },
       {
         id: "Copy Title",
-        title: "Title"
+        title: "Title",
       },
       {
         id: "Markdown",
-        title: "Markdown"
+        title: "Markdown",
       },
       {
         id: "Org",
-        title: "Org"
+        title: "Org",
       },
       {
         id: "Asciidoc",
-        title: "Asciidoc"
-      }
-    ]
-  }
+        title: "Asciidoc",
+      },
+    ],
+  },
 ] as const;
 
 function createMenu(menu: Menu, parentId?: ParentId) {
@@ -54,7 +43,7 @@ function createMenu(menu: Menu, parentId?: ParentId) {
     id: menu.id,
     title: menu.title,
     parentId,
-    contexts: ["all"]
+    contexts: ["all"],
   });
 
   if (menu.children) {
@@ -66,7 +55,7 @@ function createMenus(menus: Menu[], parentId?: ParentId): void {
   menus.forEach((child) => createMenu(child, parentId));
 }
 
-function main() {
+export function setupMenus() {
   chrome.runtime.onInstalled.addListener(() => {
     createMenus(DefaultMenu);
   });
@@ -89,13 +78,7 @@ function main() {
         sendCopyTextMessageUsingTemplate(Templates.asciidoc);
         break;
     }
-  });
 
-  chrome.action.onClicked.addListener((tab) => {
-    if (tab.id) {
-      sendToContentScript({ name: "popup", tabId: tab.id });
-    }
+    return true;
   });
 }
-
-main();

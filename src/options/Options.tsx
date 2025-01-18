@@ -1,15 +1,14 @@
 import React from "react";
+import "@/index.css";
 
-import "./style.css";
+import { evalTemplate, type Env } from "@/libs/template";
+import { useConfig } from "@/libs/hooks/config";
 
-import { useConfig } from "~libs/hooks";
-import { evalTemplate, type Env } from "~libs/template";
-
-function OptionsPage() {
+function Options() {
   const [config, updateConfig] = useConfig();
   const sampleEnv: Env = {
     title: "Sample Title",
-    url: "https://suzumiyaaoba.com/"
+    url: "https://suzumiyaaoba.com/",
   };
 
   const handleCopyOnIconCheckboxChange = (
@@ -76,4 +75,4 @@ function OptionsPage() {
   );
 }
 
-export default OptionsPage;
+export default Options;
