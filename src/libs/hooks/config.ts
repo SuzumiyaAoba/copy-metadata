@@ -25,7 +25,7 @@ export function useConfig() {
     useCallback(
       (updator: Parameters<typeof updateConfig>[0]) => {
         const value =
-          typeof updator === "function" ? produce(updator) : updator;
+          typeof updator === "function" ? produce(updator)(config) : updator;
 
         updateConfig(value);
 
