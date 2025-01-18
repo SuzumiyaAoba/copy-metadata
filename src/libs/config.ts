@@ -1,3 +1,4 @@
+import { getBucket } from "@extend-chrome/storage";
 import { z } from "zod";
 
 export type Template = {
@@ -49,3 +50,16 @@ export const DefaultConfig: Config = {
   enabledTemplate: { name: "Markdown", ...BuiltInTemplates["Markdown"] },
   copyOnIconClick: false,
 };
+
+export const CONFIG_KEY = "config";
+export const configBucket = getBucket(CONFIG_KEY);
+
+export async function getConfig() {
+  const config = await configBucket.get();
+
+  return parseConfig(config);
+}
+
+export async function setConfig(config: Config) {
+  await configBucket.set(config);
+}
