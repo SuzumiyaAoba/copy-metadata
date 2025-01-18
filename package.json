@@ -15,10 +15,12 @@
     "@egoist/tailwindcss-icons": "^1.8.2",
     "@extend-chrome/storage": "^1.5.0",
     "@plasmohq/storage": "^1.13.0",
+    "clsx": "^2.1.1",
     "immer": "^10.1.1",
     "mustache": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.6.0",
     "use-immer": "^0.11.0",
     "zod": "^3.24.1"
   },
