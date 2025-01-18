@@ -9,7 +9,7 @@ export async function createContextMenus() {
   chrome.contextMenus.create({
     id: "copy-metadata",
     title: "Copy metadata",
-    contexts: ["page"],
+    contexts: ["all"],
   });
 
   // Get templates from config and create submenus
@@ -19,7 +19,7 @@ export async function createContextMenus() {
       id: `copy-metadata-${name}`,
       parentId: "copy-metadata",
       title: name,
-      contexts: ["page"],
+      contexts: ["all"],
     });
   });
 }
