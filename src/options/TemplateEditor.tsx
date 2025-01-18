@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useConfig } from "@/libs/hooks/config";
 import { evalTemplate, type Env } from "@/libs/template";
-import { BuiltInTemplates } from "@/libs/config";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 export function TemplateEditor() {
   const [config, updateConfig] = useConfig();
@@ -32,20 +31,6 @@ export function TemplateEditor() {
       };
     });
     setNewTemplateName("");
-  };
-
-  const handleDeleteTemplate = (name: string) => {
-    updateConfig((draft) => {
-      delete draft.templates[name];
-    });
-  };
-
-  const handleResetTemplates = () => {
-    if (window.confirm("Are you sure you want to reset templates to default?")) {
-      updateConfig((draft) => {
-        draft.templates = { ...BuiltInTemplates };
-      });
-    }
   };
 
   return (
