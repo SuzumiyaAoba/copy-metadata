@@ -48,55 +48,64 @@ export function TemplateEditor() {
   };
 
   return (
-    <>
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-bold mt-4 mb-2">テンプレート</h2>
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">テンプレート</h2>
+          <p className="mt-1 text-sm text-gray-500">
+            コピーするテキストの形式をカスタマイズできます
+          </p>
+        </div>
         <button
           onClick={handleResetTemplates}
-          className="text-sm px-3 py-1 text-gray-600 hover:text-gray-800 border rounded"
+          className="text-sm px-4 py-2 text-gray-600 hover:text-gray-800 border rounded-lg hover:bg-gray-50 transition-colors"
         >
           デフォルトに戻す
         </button>
       </div>
-      <form onSubmit={handleAddTemplate} className="mb-4 flex gap-2">
+
+      <form onSubmit={handleAddTemplate} className="flex gap-3">
         <input
-          className="px-2 py-1 rounded border shadow flex-grow"
+          className="flex-grow px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
           value={newTemplateName}
           onChange={(e) => setNewTemplateName(e.target.value)}
           placeholder="新しいテンプレート名"
         />
         <button
           type="submit"
-          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
         >
           追加
         </button>
       </form>
-      <div className="grid grid-cols-8 gap-2 items-center">
+
+      <div className="space-y-4">
         {Object.entries(config.templates).map(([name, { template }]) => (
-          <React.Fragment key={name}>
-            <label className="col-span-1 w-full text-right font-semibold">
-              {name}
-            </label>
-            <input
-              className="col-span-5 px-2 py-1 rounded border shadow"
-              value={template}
-              onChange={handleTemplateChange(name)}
-            />
-            <button
-              onClick={() => handleDeleteTemplate(name)}
-              className="col-span-1 px-2 py-1 text-red-500 hover:text-red-600"
-            >
-              削除
-            </button>
-            <div className="grid grid-cols-subgrid col-span-8">
-              <div className="col-start-2 col-span-6 px-2 py-1 w-full bg-gray-100 overflow-x-scroll text-nowrap">
+          <div key={name} className="bg-gray-50 rounded-lg p-4 space-y-3">
+            <div className="grid grid-cols-8 gap-3 items-center">
+              <label className="col-span-1 text-right font-medium text-gray-700">
+                {name}
+              </label>
+              <input
+                className="col-span-6 px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+                value={template}
+                onChange={handleTemplateChange(name)}
+              />
+              <button
+                onClick={() => handleDeleteTemplate(name)}
+                className="col-span-1 px-3 py-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              >
+                削除
+              </button>
+            </div>
+            <div className="ml-[12.5%] w-[75%]">
+              <div className="px-3 py-2 bg-white rounded-lg border border-gray-200 text-sm text-gray-600 overflow-x-auto">
                 {renderTemplate(template)}
               </div>
             </div>
-          </React.Fragment>
+          </div>
         ))}
       </div>
-    </>
+    </div>
   );
 } 
