@@ -12,16 +12,20 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
+    "@egoist/tailwindcss-icons": "^1.8.2",
     "@extend-chrome/storage": "^1.5.0",
+    "@plasmohq/storage": "^1.13.0",
     "immer": "^10.1.1",
     "mustache": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "use-immer": "^0.11.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.30",
     "@eslint/js": "^9.17.0",
+    "@iconify/json": "^2.2.297",
     "@types/chrome": "^0.0.293",
     "@types/mustache": "^4.2.5",
     "@types/node": "^22.10.5",

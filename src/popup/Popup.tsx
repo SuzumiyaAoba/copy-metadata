@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
 import { createEnvFromTab, evalTemplate, type Env } from "@/libs/template";
-import { useActiveTab, useConfig } from "@/libs/hooks";
+import { useConfig } from "@/libs/hooks/config";
+import { useActiveTab } from "@/libs/hooks/tab";
 
 function Popup() {
   const [config] = useConfig();
   const [activeTab] = useActiveTab();
-  const [copyText, setCopyText] = useState("");
-
   const [currentEnv, setCurrentEnv] = useState<Env>({
     title: "",
     url: "",
   });
+  const [copyText, setCopyText] = useState("");
   const [copyButtonText, setCopyButtonText] = useState("Copy");
 
   const writeTextToClipboard = (text: string) => {
@@ -25,7 +25,7 @@ function Popup() {
   };
 
   const handleOpenOptions = async () => {
-    // await sendToBackground({ name: "openOptions" });
+    chrome.runtime.openOptionsPage();
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function Popup() {
         writeTextToClipboard(text);
       }
     }
-  }, [activeTab]);
+  }, [activeTab, config]);
 
   return (
     <div

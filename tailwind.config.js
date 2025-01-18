@@ -1,8 +1,17 @@
+const {
+  iconsPlugin,
+  getIconCollections,
+} = require("@egoist/tailwindcss-icons");
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["*.html", "./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    iconsPlugin({
+      collections: getIconCollections(["vscode-icons"]),
+    }),
+  ],
 };
