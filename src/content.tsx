@@ -8,13 +8,13 @@ export type Message = {
 
 export async function sendMessage(
   tabId: number,
-  message: Message
+  message: Message,
 ): Promise<void> {
   await chrome.tabs.sendMessage(tabId, message);
 }
 
 export async function sendCopyTextMessage(
-  callback: (_tab: chrome.tabs.Tab) => string
+  callback: (_tab: chrome.tabs.Tab) => string,
 ): Promise<void> {
   await activeTabCallback(async (tab) => {
     if (tab.id) {
@@ -24,7 +24,7 @@ export async function sendCopyTextMessage(
 }
 
 export async function sendCopyTextMessageUsingTemplate(
-  template: string
+  template: string,
 ): Promise<void> {
   return await sendCopyTextMessage((tab) => evalTemplateInTab(template, tab));
 }

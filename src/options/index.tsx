@@ -6,5 +6,5 @@ import Options from "./Options.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Options />
-  </StrictMode>
+  </StrictMode>,
 );

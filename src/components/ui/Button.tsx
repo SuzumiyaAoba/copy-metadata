@@ -10,7 +10,8 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: "bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800",
-  secondary: "border border-purple-200 text-purple-700 hover:text-purple-800 hover:bg-purple-50",
+  secondary:
+    "border border-purple-200 text-purple-700 hover:text-purple-800 hover:bg-purple-50",
   danger: "text-red-500 hover:text-red-600 hover:bg-red-50",
   ghost: "text-purple-600 hover:bg-purple-50",
 };
@@ -35,9 +36,9 @@ export function Button({
         variant === "danger" && "focus:ring-red-500",
         variantStyles[variant],
         sizeStyles[size],
-        className
+        className,
       )}
       {...props}
     />
   );
-} 
+}

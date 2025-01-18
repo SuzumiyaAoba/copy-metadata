@@ -1,84 +1,48 @@
-import { sendCopyTextMessageUsingTemplate } from "../content";
-import { Templates } from "../libs/template";
+import { getConfig } from "@/libs/config";
+import { createEnvFromTab, evalTemplate } from "@/libs/template";
 
-type ParentId = string | number;
+export async function createContextMenus() {
+  // Remove existing menus
+  await chrome.contextMenus.removeAll();
 
-type Menu = {
-  id: string;
-  title: string;
-  children?: Menu[];
-};
-
-export const DefaultMenu: Menu[] = [
-  {
-    id: "Copy metadata",
+  // Create parent menu
+  chrome.contextMenus.create({
+    id: "copy-metadata",
     title: "Copy metadata",
-    children: [
-      {
-        id: "Copy URL",
-        title: "URL",
-      },
-      {
-        id: "Copy Title",
-        title: "Title",
-      },
-      {
-        id: "Markdown",
-        title: "Markdown",
-      },
-      {
-        id: "Org",
-        title: "Org",
-      },
-      {
-        id: "Asciidoc",
-        title: "Asciidoc",
-      },
-    ],
-  },
-] as const;
-
-function createMenu(menu: Menu, parentId?: ParentId) {
-  const parent = chrome.contextMenus.create({
-    id: menu.id,
-    title: menu.title,
-    parentId,
-    contexts: ["all"],
+    contexts: ["page"],
   });
 
-  if (menu.children) {
-    createMenus(menu.children, parent);
-  }
+  // Get templates from config and create submenus
+  const config = await getConfig();
+  Object.entries(config.templates).forEach(([name]) => {
+    chrome.contextMenus.create({
+      id: `copy-metadata-${name}`,
+      parentId: "copy-metadata",
+      title: name,
+      contexts: ["page"],
+    });
+  });
 }
 
-function createMenus(menus: Menu[], parentId?: ParentId): void {
-  menus.forEach((child) => createMenu(child, parentId));
-}
+export async function handleContextMenuClick(
+  info: chrome.contextMenus.OnClickData,
+  tab?: chrome.tabs.Tab,
+) {
+  if (!tab?.id) return;
+  if (!info.menuItemId.toString().startsWith("copy-metadata")) return;
 
-export function setupMenus() {
-  chrome.runtime.onInstalled.addListener(() => {
-    createMenus(DefaultMenu);
-  });
+  const templateName = info.menuItemId.toString().replace("copy-metadata-", "");
+  if (templateName === "copy-metadata") return;
 
-  chrome.contextMenus.onClicked.addListener((info, _tab) => {
-    switch (info.menuItemId) {
-      case "Copy URL":
-        sendCopyTextMessageUsingTemplate(Templates.url);
-        break;
-      case "Copy Title":
-        sendCopyTextMessageUsingTemplate(Templates.title);
-        break;
-      case "Markdown":
-        sendCopyTextMessageUsingTemplate(Templates.markdown);
-        break;
-      case "Org":
-        sendCopyTextMessageUsingTemplate(Templates.org);
-        break;
-      case "Asciidoc":
-        sendCopyTextMessageUsingTemplate(Templates.asciidoc);
-        break;
-    }
+  const config = await getConfig();
+  const template = config.templates[templateName]?.template;
+  if (!template) return;
 
-    return true;
-  });
+  const env = createEnvFromTab(tab);
+  if (!env) return;
+
+  const text = evalTemplate(template, env);
+  if (!text) return;
+
+  await navigator.clipboard.writeText(text);
 }

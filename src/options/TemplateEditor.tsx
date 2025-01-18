@@ -24,13 +24,25 @@ export function TemplateEditor() {
   const handleAddTemplate = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTemplateName.trim()) return;
-    
+
     updateConfig((draft) => {
       draft.templates[newTemplateName] = {
         template: "{{{ title }}} - {{{ url }}}",
       };
     });
     setNewTemplateName("");
+  };
+
+  const handleResetToDefault = () => {
+    updateConfig((draft) => {
+      draft.templates = {};
+    });
+  };
+
+  const handleDeleteTemplate = (name: string) => {
+    updateConfig((draft) => {
+      delete draft.templates[name];
+    });
   };
 
   return (
@@ -42,7 +54,9 @@ export function TemplateEditor() {
             Customize the format of copied text
           </p>
         </div>
-        <Button variant="secondary">Reset to Default</Button>
+        <Button variant="secondary" onClick={handleResetToDefault}>
+          Reset to Default
+        </Button>
       </div>
 
       <form onSubmit={handleAddTemplate} className="flex gap-3">
@@ -53,12 +67,17 @@ export function TemplateEditor() {
           onChange={(e) => setNewTemplateName(e.target.value)}
           placeholder="New template name"
         />
-        <Button type="submit" variant="primary">Add</Button>
+        <Button type="submit" variant="primary">
+          Add
+        </Button>
       </form>
 
       <div className="space-y-4">
         {Object.entries(config.templates).map(([name, { template }]) => (
-          <div key={name} className="bg-purple-50 rounded-lg p-4 space-y-3 border border-purple-100">
+          <div
+            key={name}
+            className="bg-purple-50 rounded-lg p-4 space-y-3 border border-purple-100"
+          >
             <div className="grid grid-cols-8 gap-3 items-center">
               <label className="col-span-1 text-right font-medium text-purple-900">
                 {name}
@@ -69,11 +88,19 @@ export function TemplateEditor() {
                 value={template}
                 onChange={handleTemplateChange(name)}
               />
-              <Button variant="danger" className="col-span-1">Delete</Button>
+              <Button
+                variant="danger"
+                className="col-span-1"
+                onClick={() => handleDeleteTemplate(name)}
+              >
+                Delete
+              </Button>
             </div>
             <div className="ml-[12.5%] w-[75%]">
-              <div className="px-3 py-2 bg-white rounded-lg border border-purple-200 
-                           text-sm text-purple-900 overflow-x-auto">
+              <div
+                className="px-3 py-2 bg-white rounded-lg border border-purple-200 
+                           text-sm text-purple-900 overflow-x-auto"
+              >
                 {renderTemplate(template)}
               </div>
             </div>
@@ -82,4 +109,4 @@ export function TemplateEditor() {
       </div>
     </div>
   );
-} 
+}

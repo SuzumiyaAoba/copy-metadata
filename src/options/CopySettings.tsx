@@ -4,7 +4,9 @@ import { useConfig } from "@/libs/hooks/config";
 export function CopySettings() {
   const [config, updateConfig] = useConfig();
 
-  const handleCopyOnIconClickChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCopyOnIconClickChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     updateConfig((draft) => {
       draft.copyOnIconClick = e.target.checked;
     });
@@ -36,4 +38,4 @@ export function CopySettings() {
       </div>
     </div>
   );
-} 
+}

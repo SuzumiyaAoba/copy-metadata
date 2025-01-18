@@ -14,10 +14,12 @@ function MetadataDisplay({ env }: { env: Env }) {
             {key.charAt(0).toUpperCase() + key.slice(1)}
           </span>
           <div className="flex-1 min-w-0">
-            <p className={cn(
-              "text-sm font-medium text-gray-900 leading-relaxed",
-              key === "url" ? "font-mono break-all" : "break-words"
-            )}>
+            <p
+              className={cn(
+                "text-sm font-medium text-gray-900 leading-relaxed",
+                key === "url" ? "font-mono break-all" : "break-words",
+              )}
+            >
               {value}
             </p>
           </div>
@@ -33,8 +35,10 @@ function PreviewBox({ content }: { content: string }) {
       <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
         <span className="text-xs font-medium text-purple-600">Preview</span>
       </div>
-      <div className="px-3.5 py-2.5 text-sm font-medium text-gray-800 border border-purple-200 
-                    rounded-lg bg-purple-50/50 overflow-x-auto whitespace-nowrap font-mono shadow-sm">
+      <div
+        className="px-3.5 py-2.5 text-sm font-medium text-gray-800 border border-purple-200 
+                    rounded-lg bg-purple-50/50 overflow-x-auto whitespace-nowrap font-mono shadow-sm"
+      >
         {content}
       </div>
     </div>
@@ -91,14 +95,12 @@ export function Popup() {
             }}
           >
             {Object.entries(config.templates).map(([name]) => (
-              <option key={name} value={name}>{name}</option>
+              <option key={name} value={name}>
+                {name}
+              </option>
             ))}
           </select>
-          <Button
-            variant="primary"
-            onClick={handleCopy}
-            className="w-24"
-          >
+          <Button variant="primary" onClick={handleCopy} className="w-24">
             {isCopied ? (
               <div className="flex items-center gap-1">
                 <span className="i-heroicons-check-circle-20-solid" />

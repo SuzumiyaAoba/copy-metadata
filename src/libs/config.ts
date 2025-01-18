@@ -1,17 +1,15 @@
 import { getBucket } from "@extend-chrome/storage";
 import { z } from "zod";
 
-export type Template = {
-  name: string;
-  template: string;
-};
+const templateSchema = z.object({
+  template: z.string(),
+});
 
-export type Templates = Record<
-  string,
-  {
-    template: string;
-  }
->;
+export type Template = z.infer<typeof templateSchema>;
+
+const templatesSchema = z.record(templateSchema);
+
+export type Templates = z.infer<typeof templatesSchema>;
 
 export const BuiltInTemplates: Templates = {
   URL: {
@@ -62,4 +60,12 @@ export async function getConfig() {
 
 export async function setConfig(config: Config) {
   await configBucket.set(config);
+}
+
+export function subscribeTemplates(callback: (_templates: Templates) => void) {
+  configBucket.changeStream.subscribe(({ templates }) => {
+    if (templates) {
+      callback(templatesSchema.parse(templates.newValue));
+    }
+  });
 }
