@@ -13,9 +13,9 @@ export function CopySettings() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">コピー設定</h2>
+        <h2 className="text-xl font-bold text-gray-900">Copy Settings</h2>
         <p className="mt-1 text-sm text-gray-500">
-          アイコンクリック時の動作を設定できます
+          Configure automatic copy behavior
         </p>
       </div>
 
@@ -31,7 +31,7 @@ export function CopySettings() {
           htmlFor="copyOnIconClick"
           className="text-sm font-medium text-gray-700"
         >
-          アイコンクリック時に自動でコピーする
+          Copy automatically when clicking the icon
         </label>
       </div>
     </div>

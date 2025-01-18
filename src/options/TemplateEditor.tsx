@@ -40,7 +40,7 @@ export function TemplateEditor() {
   };
 
   const handleResetTemplates = () => {
-    if (window.confirm("テンプレートをデフォルトの状態に戻しますか？")) {
+    if (window.confirm("Are you sure you want to reset templates to default?")) {
       updateConfig((draft) => {
         draft.templates = { ...BuiltInTemplates };
       });
@@ -51,16 +51,16 @@ export function TemplateEditor() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">テンプレート</h2>
+          <h2 className="text-xl font-bold text-gray-900">Templates</h2>
           <p className="mt-1 text-sm text-gray-500">
-            コピーするテキストの形式をカスタマイズできます
+            Customize the format of copied text
           </p>
         </div>
         <button
           onClick={handleResetTemplates}
           className="text-sm px-4 py-2 text-gray-600 hover:text-gray-800 border rounded-lg hover:bg-gray-50 transition-colors"
         >
-          デフォルトに戻す
+          Reset to Default
         </button>
       </div>
 
@@ -69,13 +69,13 @@ export function TemplateEditor() {
           className="flex-grow px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
           value={newTemplateName}
           onChange={(e) => setNewTemplateName(e.target.value)}
-          placeholder="新しいテンプレート名"
+          placeholder="New template name"
         />
         <button
           type="submit"
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
         >
-          追加
+          Add
         </button>
       </form>
 
@@ -95,7 +95,7 @@ export function TemplateEditor() {
                 onClick={() => handleDeleteTemplate(name)}
                 className="col-span-1 px-3 py-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               >
-                削除
+                Delete
               </button>
             </div>
             <div className="ml-[12.5%] w-[75%]">

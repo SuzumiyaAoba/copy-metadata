@@ -12,7 +12,7 @@ function Popup() {
     url: "",
   });
   const [copyText, setCopyText] = useState("");
-  const [copyButtonText, setCopyButtonText] = useState("コピー");
+  const [copyButtonText, setCopyButtonText] = useState("Copy");
 
   const writeTextToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -88,12 +88,12 @@ function Popup() {
                      shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={handleOnCopyClick}
           >
-            {copyButtonText === "コピー" ? (
-              "コピー"
+            {copyButtonText === "Copy" ? (
+              "Copy"
             ) : (
               <div className="flex items-center gap-1">
                 <span className="i-heroicons-check-circle-20-solid" />
-                コピー完了
+                Copied!
               </div>
             )}
           </button>
@@ -125,7 +125,7 @@ function Popup() {
 
           <div className="relative">
             <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
-              <span className="text-xs font-medium text-gray-500">プレビュー</span>
+              <span className="text-xs font-medium text-gray-500">Preview</span>
             </div>
             <div className="px-3.5 py-2.5 text-sm font-medium text-gray-800 border rounded-lg bg-gray-50 
                           overflow-x-auto whitespace-nowrap font-mono shadow-sm">
@@ -143,7 +143,7 @@ function Popup() {
                      focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             <span className="i-heroicons-cog-6-tooth text-[14px]" />
-            設定
+            Settings
           </button>
         </div>
       </div>

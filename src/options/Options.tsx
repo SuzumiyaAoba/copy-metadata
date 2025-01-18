@@ -10,7 +10,7 @@ function Options() {
           <div className="border-b pb-6 mb-6">
             <h1 className="text-3xl font-bold text-gray-900">Copy metadata</h1>
             <p className="mt-2 text-gray-600">
-              カスタマイズ可能なテンプレートでメタデータをコピー
+              Copy metadata with customizable templates
             </p>
           </div>
           <div className="space-y-8">
