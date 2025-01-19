@@ -37,12 +37,20 @@ export function TemplateEditor() {
   };
 
   const handleResetToDefault = () => {
+    if (
+      !window.confirm(
+        "Are you sure you want to reset all templates to default?",
+      )
+    )
+      return;
     updateConfig((draft) => {
       draft.templates = {};
     });
   };
 
   const handleDeleteTemplate = (name: string) => {
+    if (!window.confirm(`Are you sure you want to delete "${name}" template?`))
+      return;
     updateConfig((draft) => {
       delete draft.templates[name];
     });

@@ -80,7 +80,8 @@ export function Popup() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(copyText);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+    const timer = setTimeout(() => setIsCopied(false), 2000);
+    return () => clearTimeout(timer);
   };
 
   const handleTemplateChange = (name: string, template: string) => {
@@ -91,7 +92,6 @@ export function Popup() {
 
   useEffect(() => {
     if (!activeTab) return;
-
     const env = createEnvFromTab(activeTab);
     if (!env) return;
 
@@ -101,7 +101,7 @@ export function Popup() {
     if (config.copyOnIconClick) {
       handleCopy();
     }
-  }, [activeTab, config]);
+  }, [activeTab, config, handleCopy]);
 
   return (
     <div
