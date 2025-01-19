@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { createEnvFromTab, evalTemplate, type Env } from "@/libs/template";
 import { useTheme } from "@/libs/hooks/config";
 import { useConfig } from "@/libs/contexts/config";
@@ -80,8 +80,7 @@ export function Popup() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(copyText);
     setIsCopied(true);
-    const timer = setTimeout(() => setIsCopied(false), 2000);
-    return () => clearTimeout(timer);
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   const handleTemplateChange = (name: string, template: string) => {
@@ -89,6 +88,9 @@ export function Popup() {
       draft.enabledTemplate = { name, template };
     });
   };
+
+  // メモ化してuseEffectの依存配列に安全に追加できるようにする
+  const memoizedHandleCopy = useCallback(handleCopy, [copyText]);
 
   useEffect(() => {
     if (!activeTab) return;
@@ -99,9 +101,9 @@ export function Popup() {
     setCopyText(evalTemplate(config.enabledTemplate.template, env) ?? "");
 
     if (config.copyOnIconClick) {
-      handleCopy();
+      memoizedHandleCopy();
     }
-  }, [activeTab, config, handleCopy]);
+  }, [activeTab, config, memoizedHandleCopy]);
 
   return (
     <div
