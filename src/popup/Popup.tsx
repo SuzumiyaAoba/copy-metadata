@@ -132,10 +132,10 @@ export function Popup() {
               </option>
             ))}
           </select>
-          <Button variant="primary" onClick={handleCopy} className="w-24">
+          <Button variant="primary" onClick={memoizedHandleCopy} className="w-30">
             {isCopied ? (
-              <div className="flex items-center gap-1">
-                <span className="i-heroicons-check-circle-20-solid" />
+              <div className="flex items-center gap-1.5">
+                <span className="i-heroicons-check-circle-solid w-5 h-5" />
                 Copied!
               </div>
             ) : (
