@@ -1,8 +1,10 @@
 import React from "react";
-import { useConfig } from "@/libs/hooks/config";
+import { useConfig, useTheme } from "@/libs/hooks/config";
+import { cn } from "@/libs/utils";
 
 export function CopySettings() {
   const [config, updateConfig] = useConfig();
+  const theme = useTheme();
 
   const handleCopyOnIconClickChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -15,23 +17,34 @@ export function CopySettings() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-purple-900">Copy Settings</h2>
-        <p className="mt-1 text-sm text-purple-600">
+        <h2 className={cn("text-xl font-bold", theme.colors.primary.text)}>
+          Copy Settings
+        </h2>
+        <p className={theme.colors.primary.text}>
           Configure automatic copy behavior
         </p>
       </div>
 
-      <div className="flex items-center space-x-3 bg-purple-50 rounded-lg p-4 border border-purple-100">
+      <div className={cn(
+        "flex items-center space-x-3 rounded-lg p-4 border",
+        theme.colors.primary.bg.light,
+        theme.colors.primary.border
+      )}>
         <input
           type="checkbox"
           id="copyOnIconClick"
           checked={config.copyOnIconClick}
           onChange={handleCopyOnIconClickChange}
-          className="h-4 w-4 text-purple-600 rounded border-purple-300 focus:ring-purple-500"
+          className={cn(
+            "h-4 w-4 rounded border focus:ring-2",
+            theme.colors.primary.text,
+            theme.colors.primary.border,
+            theme.colors.primary.ring
+          )}
         />
         <label
           htmlFor="copyOnIconClick"
-          className="text-sm font-medium text-purple-900"
+          className={theme.colors.primary.text}
         >
           Copy automatically when clicking the icon
         </label>

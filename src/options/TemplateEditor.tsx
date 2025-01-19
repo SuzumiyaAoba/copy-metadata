@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useConfig } from "@/libs/hooks/config";
+import { useConfig, useTheme } from "@/libs/hooks/config";
 import { evalTemplate, type Env } from "@/libs/template";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/libs/utils";
 
 export function TemplateEditor() {
   const [config, updateConfig] = useConfig();
+  const theme = useTheme();
   const [newTemplateName, setNewTemplateName] = useState("");
   const sampleEnv: Env = {
     title: "Sample Title",
@@ -49,8 +51,10 @@ export function TemplateEditor() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-bold text-purple-900">Templates</h2>
-          <p className="mt-1 text-sm text-purple-600">
+          <h2 className={cn("text-xl font-bold", theme.colors.primary.text)}>
+            Templates
+          </h2>
+          <p className={theme.colors.primary.text}>
             Customize the format of copied text
           </p>
         </div>
@@ -61,8 +65,11 @@ export function TemplateEditor() {
 
       <form onSubmit={handleAddTemplate} className="flex gap-3">
         <input
-          className="flex-grow px-3 py-2 rounded-lg border border-purple-200 shadow-sm 
-                   focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow"
+          className={cn(
+            "flex-grow px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+            theme.colors.primary.border,
+            theme.colors.primary.ring
+          )}
           value={newTemplateName}
           onChange={(e) => setNewTemplateName(e.target.value)}
           placeholder="New template name"
@@ -76,15 +83,25 @@ export function TemplateEditor() {
         {Object.entries(config.templates).map(([name, { template }]) => (
           <div
             key={name}
-            className="bg-purple-50 rounded-lg p-4 space-y-3 border border-purple-100"
+            className={cn(
+              "rounded-lg p-4 space-y-3 border",
+              theme.colors.primary.bg.light,
+              theme.colors.primary.border
+            )}
           >
             <div className="grid grid-cols-8 gap-3 items-center">
-              <label className="col-span-1 text-right font-medium text-purple-900">
+              <label className={cn(
+                "col-span-1 text-right font-medium",
+                theme.colors.primary.text
+              )}>
                 {name}
               </label>
               <input
-                className="col-span-6 px-3 py-2 rounded-lg border border-purple-200 shadow-sm 
-                         focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow"
+                className={cn(
+                  "col-span-6 px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+                  theme.colors.primary.border,
+                  theme.colors.primary.ring
+                )}
                 value={template}
                 onChange={handleTemplateChange(name)}
               />
@@ -97,10 +114,11 @@ export function TemplateEditor() {
               </Button>
             </div>
             <div className="ml-[12.5%] w-[75%]">
-              <div
-                className="px-3 py-2 bg-white rounded-lg border border-purple-200 
-                           text-sm text-purple-900 overflow-x-auto"
-              >
+              <div className={cn(
+                "px-3 py-2 bg-white rounded-lg border text-sm overflow-x-auto",
+                theme.colors.primary.border,
+                theme.colors.primary.text
+              )}>
                 {renderTemplate(template)}
               </div>
             </div>
