@@ -45,6 +45,10 @@ export function useTheme() {
         setTheme(THEMES[config.theme]);
       });
     });
+
+    getConfig().then((config) => {
+      setTheme(THEMES[config.theme]);
+    });
   }, []);
 
   return theme;
