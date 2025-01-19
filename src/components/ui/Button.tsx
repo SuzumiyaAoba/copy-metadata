@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { cn } from "@/libs/utils";
-import { useConfig } from "@/libs/hooks/config";
+import { useConfig } from "@/libs/contexts/config";
 import { THEMES } from "@/constants/themes";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";

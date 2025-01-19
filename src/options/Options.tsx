@@ -9,23 +9,23 @@ function Options() {
   const theme = useTheme();
 
   return (
-    <div className={cn(
-      "min-h-screen bg-gradient-to-b",
-      `from-${theme.colors.primary.bg.fade} to-white`
-    )}>
+    <div
+      className={cn(
+        "min-h-screen bg-gradient-to-b",
+        `from-${theme.colors.primary.bg.fade} to-white`,
+      )}
+    >
       <div className="max-w-4xl mx-auto px-6 py-8">
-        <div className={cn(
-          "bg-white/80 backdrop-blur rounded-xl shadow-sm p-8 border",
-          theme.colors.primary.border
-        )}>
-          <div className={cn(
-            "border-b pb-6 mb-6",
-            theme.colors.primary.border
-          )}>
-            <h1 className={cn(
-              "text-3xl font-bold",
-              theme.colors.primary.text
-            )}>
+        <div
+          className={cn(
+            "bg-white/80 backdrop-blur rounded-xl shadow-sm p-8 border",
+            theme.colors.primary.border,
+          )}
+        >
+          <div
+            className={cn("border-b pb-6 mb-6", theme.colors.primary.border)}
+          >
+            <h1 className={cn("text-3xl font-bold", theme.colors.primary.text)}>
               Copy metadata
             </h1>
             <p className={theme.colors.primary.text}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createEnvFromTab, evalTemplate, type Env } from "@/libs/template";
-import { useConfig, useTheme } from "@/libs/hooks/config";
+import { useTheme } from "@/libs/hooks/config";
+import { useConfig } from "@/libs/contexts/config";
 import { useActiveTab } from "@/libs/hooks/tab";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
@@ -9,16 +10,20 @@ function MetadataDisplay({ env }: { env: Env }) {
   const theme = useTheme();
 
   return (
-    <div className={cn(
-      "space-y-2.5 rounded-lg p-3.5 border bg-white/80",
-      theme.colors.primary.bg.light,
-      theme.colors.primary.border
-    )}>
+    <div
+      className={cn(
+        "space-y-2.5 rounded-lg p-3.5 border bg-white/80",
+        theme.colors.primary.bg.light,
+        theme.colors.primary.border,
+      )}
+    >
       {Object.entries(env).map(([key, value]) => (
         <div key={key} className="flex">
-          <span className={cn(
-            "text-xs font-medium w-12 text-right pr-2.5 pt-0.5 text-gray-500"
-          )}>
+          <span
+            className={cn(
+              "text-xs font-medium w-12 text-right pr-2.5 pt-0.5 text-gray-500",
+            )}
+          >
             {key.charAt(0).toUpperCase() + key.slice(1)}
           </span>
           <div className="flex-1 min-w-0">
@@ -43,19 +48,18 @@ function PreviewBox({ content }: { content: string }) {
   return (
     <div className="relative">
       <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
-        <span className={cn(
-          "text-xs font-medium",
-          theme.colors.primary.text
-        )}>
+        <span className={cn("text-xs font-medium", theme.colors.primary.text)}>
           Preview
         </span>
       </div>
-      <div className={cn(
-        "px-3.5 py-2.5 text-sm font-medium border rounded-lg overflow-x-auto whitespace-nowrap font-mono shadow-sm bg-white/90",
-        theme.colors.primary.border,
-        "text-gray-900",
-        theme.colors.primary.bg.fade
-      )}>
+      <div
+        className={cn(
+          "px-3.5 py-2.5 text-sm font-medium border rounded-lg overflow-x-auto whitespace-nowrap font-mono shadow-sm bg-white/90",
+          theme.colors.primary.border,
+          "text-gray-900",
+          theme.colors.primary.bg.fade,
+        )}
+      >
         {content}
       </div>
     </div>
@@ -100,17 +104,19 @@ export function Popup() {
   }, [activeTab, config]);
 
   return (
-    <div className={cn(
-      "w-96 bg-gradient-to-b backdrop-blur",
-      `from-${theme.colors.primary.bg.fade}`
-    )}>
+    <div
+      className={cn(
+        "w-96 bg-gradient-to-b backdrop-blur",
+        `from-${theme.colors.primary.bg.fade}`,
+      )}
+    >
       <div className="p-4 space-y-4">
         <div className="flex gap-2">
           <select
             className={cn(
               "flex-grow px-3 py-2 text-sm rounded-lg border bg-white/90 shadow-sm focus:ring-2 transition-shadow text-gray-900",
               theme.colors.primary.border,
-              theme.colors.primary.ring
+              theme.colors.primary.ring,
             )}
             value={config.enabledTemplate.name}
             onChange={(e) => {

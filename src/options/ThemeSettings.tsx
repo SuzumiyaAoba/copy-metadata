@@ -1,4 +1,4 @@
-import { useConfig } from "@/libs/hooks/config";
+import { useConfig } from "@/libs/contexts/config";
 import { THEMES, type ThemeId } from "@/constants/themes";
 import { cn } from "@/libs/utils";
 
@@ -15,9 +15,7 @@ export function ThemeSettings() {
     <div className="space-y-4">
       <div>
         <h2 className="text-xl font-bold text-gray-900">Theme Settings</h2>
-        <p className="mt-1 text-sm text-gray-500">
-          Customize the appearance
-        </p>
+        <p className="mt-1 text-sm text-gray-500">Customize the appearance</p>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
@@ -43,4 +41,4 @@ export function ThemeSettings() {
       </div>
     </div>
   );
-} 
+}

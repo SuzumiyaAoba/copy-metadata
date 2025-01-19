@@ -1,5 +1,6 @@
 import React from "react";
-import { useConfig, useTheme } from "@/libs/hooks/config";
+import { useTheme } from "@/libs/hooks/config";
+import { useConfig } from "@/libs/contexts/config";
 import { cn } from "@/libs/utils";
 
 export function CopySettings() {
@@ -25,11 +26,13 @@ export function CopySettings() {
         </p>
       </div>
 
-      <div className={cn(
-        "flex items-center space-x-3 rounded-lg p-4 border",
-        theme.colors.primary.bg.light,
-        theme.colors.primary.border
-      )}>
+      <div
+        className={cn(
+          "flex items-center space-x-3 rounded-lg p-4 border",
+          theme.colors.primary.bg.light,
+          theme.colors.primary.border,
+        )}
+      >
         <input
           type="checkbox"
           id="copyOnIconClick"
@@ -39,13 +42,10 @@ export function CopySettings() {
             "h-4 w-4 rounded border focus:ring-2",
             theme.colors.primary.text,
             theme.colors.primary.border,
-            theme.colors.primary.ring
+            theme.colors.primary.ring,
           )}
         />
-        <label
-          htmlFor="copyOnIconClick"
-          className={theme.colors.primary.text}
-        >
+        <label htmlFor="copyOnIconClick" className={theme.colors.primary.text}>
           Copy automatically when clicking the icon
         </label>
       </div>
