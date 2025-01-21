@@ -37,8 +37,14 @@ const configSchema = z.object({
   theme: z.enum(["purple", "blue", "emerald"]).default("purple"),
 });
 
-export const parseConfig = (json: unknown) => {
-  return configSchema.parse(json);
+export const parseConfig = async (json: unknown) => {
+  try {
+    return configSchema.parse(json);
+  } catch (_e) {
+    await setConfig(DefaultConfig);
+
+    return DefaultConfig;
+  }
 };
 
 export type Config = z.infer<typeof configSchema>;
@@ -57,7 +63,7 @@ export const configBucket = getBucket(CONFIG_KEY);
 export async function getConfig() {
   const config = await configBucket.get();
 
-  return parseConfig(config);
+  return await parseConfig(config);
 }
 
 export async function setConfig(config: Config) {
