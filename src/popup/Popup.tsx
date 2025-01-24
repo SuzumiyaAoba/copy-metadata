@@ -80,7 +80,13 @@ export function Popup() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(copyText);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+
+    console.log("copy duration", config.copyDuration);
+
+    setTimeout(() => {
+      setIsCopied(false);
+      window.close();
+    }, config.copyDuration);
   };
 
   const handleTemplateChange = (name: string, template: string) => {
@@ -89,8 +95,7 @@ export function Popup() {
     });
   };
 
-  // メモ化してuseEffectの依存配列に安全に追加できるようにする
-  const memoizedHandleCopy = useCallback(handleCopy, [copyText]);
+  const memoizedHandleCopy = useCallback(handleCopy, [copyText, config.copyDuration]);
 
   useEffect(() => {
     if (!activeTab) return;

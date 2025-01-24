@@ -35,6 +35,7 @@ const configSchema = z.object({
   enabledTemplate: z.object({ name: z.string(), template: z.string() }),
   copyOnIconClick: z.boolean(),
   theme: z.enum(["purple", "blue", "emerald"]).default("purple"),
+  copyDuration: z.number().default(2000),
 });
 
 export const parseConfig = async (json: unknown) => {
@@ -55,6 +56,7 @@ export const DefaultConfig: Config = {
   enabledTemplate: { name: "Markdown", ...BuiltInTemplates["Markdown"] },
   copyOnIconClick: false,
   theme: "purple",
+  copyDuration: 2000,
 };
 
 export const CONFIG_KEY = "config";

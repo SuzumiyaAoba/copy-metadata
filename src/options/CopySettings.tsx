@@ -15,6 +15,12 @@ export function CopySettings() {
     });
   };
 
+  const handleCopyDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateConfig((draft) => {
+      draft.copyDuration = Number(e.target.value) * 1000;
+    });
+  };
+
   return (
     <div className="space-y-4">
       <div>
@@ -24,6 +30,20 @@ export function CopySettings() {
         <p className={theme.colors.primary.text}>
           Configure automatic copy behavior
         </p>
+      </div>
+
+      <div className="flex items-center space-x-3">
+        <label className={theme.colors.primary.text}>Copy Duration (s):</label>
+        <input
+          type="number"
+          value={config.copyDuration / 1000}
+          onChange={(e) => handleCopyDurationChange(e)}
+          className={cn(
+            "px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+            theme.colors.primary.border,
+            theme.colors.primary.ring,
+          )}
+        />
       </div>
 
       <div
