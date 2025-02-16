@@ -89,9 +89,9 @@ export function Popup() {
     }, config.copyDuration);
   };
 
-  const handleTemplateChange = (name: string, template: string) => {
+  const handleTemplateChange = (name: string) => {
     updateConfig((draft) => {
-      draft.enabledTemplate = { name, template };
+      draft.enabledTemplate = { name, template: draft.templates[name].template };
     });
   };
 
@@ -128,7 +128,7 @@ export function Popup() {
             value={config.enabledTemplate.name}
             onChange={(e) => {
               const name = e.target.value;
-              handleTemplateChange(name, config.templates[name].template);
+              handleTemplateChange(name);
             }}
           >
             {Object.entries(config.templates).map(([name]) => (
