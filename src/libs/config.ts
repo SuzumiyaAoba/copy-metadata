@@ -56,7 +56,7 @@ export const DefaultConfig: Config = {
   enabledTemplate: { name: "Markdown", ...BuiltInTemplates["Markdown"] },
   copyOnIconClick: false,
   theme: "purple",
-  copyDuration: 2000,
+  copyDuration: 5000,
 };
 
 export const CONFIG_KEY = "config";
