@@ -4,10 +4,11 @@ import { TemplateEditor } from "./TemplateEditor";
 import { ThemeSettings } from "./ThemeSettings";
 import { useTheme } from "@/libs/hooks/config";
 import { cn } from "@/libs/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getMetadata } from "@/libs/utils";
 import { useConfig } from "@/libs/contexts/config";
 import { evalTemplate } from "@/libs/template";
+import { Button } from "@/components/ui/Button";
 
 function MetadataManager() {
   const [metadata, setMetadata] = useState(getMetadata("metadata"));
@@ -16,6 +17,10 @@ function MetadataManager() {
     config.enabledTemplate.name
   );
   const theme = useTheme();
+  const [formatTemplate, setFormatTemplate] = useState(
+    localStorage.getItem("formatTemplate") || "{{{url}}}"
+  );
+  const [previewText, setPreviewText] = useState("");
 
   const handleDelete = (index: number) => {
     const updatedMetadata = metadata.filter((_, i) => i !== index);
@@ -33,12 +38,42 @@ function MetadataManager() {
     await navigator.clipboard.writeText(formattedText);
     alert("Copied to clipboard!");
   };
+  const handleFormatAndCopyAll = () => {
+    const formattedText = metadata
+      .map((item) => evalTemplate(formatTemplate, item) ?? "")
+      .join("\n");
+    navigator.clipboard.writeText(formattedText);
+    alert("All URLs copied to clipboard!");
+  };
+
+  const updatePreview = () => {
+    const preview = metadata
+      .map((item) => evalTemplate(formatTemplate, item) ?? "")
+      .join("\n");
+    setPreviewText(preview);
+  };
+
+  const handleFormatTemplateChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newTemplate = e.target.value;
+    setFormatTemplate(newTemplate);
+    localStorage.setItem("formatTemplate", newTemplate);
+  };
+
+  useEffect(() => {
+    updatePreview();
+  }, [formatTemplate, metadata]);
 
   return (
     <div className="space-y-4">
       <h2 className={cn("text-2xl font-semibold", theme.colors.primary.text)}>
         Saved Metadata
       </h2>
+      <p className={cn("text-sm text-gray-600", theme.colors.primary.text)}>
+        Use Mustache syntax for templates. Example:
+        &#123;&#123;&#123;url&#125;&#125;&#125;
+      </p>
       <select
         className={cn(
           "w-full px-3 py-2 text-sm rounded-lg border bg-white shadow-sm focus:ring-2 transition-shadow",
@@ -95,6 +130,32 @@ function MetadataManager() {
           ))}
         </ul>
       )}
+      <div className="mt-4">
+        <input
+          type="text"
+          value={formatTemplate}
+          onChange={handleFormatTemplateChange}
+          placeholder="Enter format template"
+          className="w-full px-3 py-2 text-sm rounded-lg border bg-white/90 shadow-sm focus:ring-2 transition-shadow text-gray-900"
+        />
+        <Button
+          variant="primary"
+          onClick={handleFormatAndCopyAll}
+          className="w-full mt-2"
+        >
+          Copy All URLs
+        </Button>
+        <div className="mt-2">
+          <h3
+            className={cn("text-lg font-semibold", theme.colors.primary.text)}
+          >
+            Preview
+          </h3>
+          <pre className="bg-gray-100 p-2 rounded-lg text-sm overflow-x-auto">
+            {previewText}
+          </pre>
+        </div>
+      </div>
     </div>
   );
 }

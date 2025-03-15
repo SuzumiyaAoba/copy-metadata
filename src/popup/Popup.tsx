@@ -5,7 +5,7 @@ import { useConfig } from "@/libs/contexts/config";
 import { useActiveTab } from "@/libs/hooks/tab";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
-import { getMetadata, saveMetadata, formatMetadata } from "@/libs/utils";
+import { getMetadata, saveMetadata } from "@/libs/utils";
 
 function MetadataDisplay({ env }: { env: Env }) {
   const theme = useTheme();
