@@ -130,7 +130,10 @@ function MetadataManager() {
           ))}
         </ul>
       )}
-      <div className="mt-4">
+      <div className="mt-6">
+        <h3 className={cn("text-lg font-semibold", theme.colors.primary.text)}>
+          Format Template
+        </h3>
         <input
           type="text"
           value={formatTemplate}
@@ -138,14 +141,7 @@ function MetadataManager() {
           placeholder="Enter format template"
           className="w-full px-3 py-2 text-sm rounded-lg border bg-white/90 shadow-sm focus:ring-2 transition-shadow text-gray-900"
         />
-        <Button
-          variant="primary"
-          onClick={handleFormatAndCopyAll}
-          className="w-full mt-2"
-        >
-          Copy All URLs
-        </Button>
-        <div className="mt-2">
+        <div className="mt-4">
           <h3
             className={cn("text-lg font-semibold", theme.colors.primary.text)}
           >
@@ -155,6 +151,13 @@ function MetadataManager() {
             {previewText}
           </pre>
         </div>
+        <Button
+          variant="primary"
+          onClick={handleFormatAndCopyAll}
+          className="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Copy All Formatted URLs
+        </Button>
       </div>
     </div>
   );
