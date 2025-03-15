@@ -40,7 +40,7 @@ export function TemplateEditor() {
   const handleResetToDefault = () => {
     if (
       !window.confirm(
-        "Are you sure you want to reset all templates to default?"
+        "Are you sure you want to reset all templates to default?",
       )
     )
       return;
@@ -78,7 +78,7 @@ export function TemplateEditor() {
           className={cn(
             "flex-grow px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
             theme.colors.primary.border,
-            theme.colors.primary.ring
+            theme.colors.primary.ring,
           )}
           value={newTemplateName}
           onChange={(e) => setNewTemplateName(e.target.value)}
@@ -96,14 +96,14 @@ export function TemplateEditor() {
             className={cn(
               "rounded-lg p-4 space-y-3 border",
               theme.colors.primary.bg.light,
-              theme.colors.primary.border
+              theme.colors.primary.border,
             )}
           >
             <div className="grid grid-cols-8 gap-3 items-center">
               <label
                 className={cn(
                   "col-span-1 text-right font-medium",
-                  theme.colors.primary.text
+                  theme.colors.primary.text,
                 )}
               >
                 {name}
@@ -112,7 +112,7 @@ export function TemplateEditor() {
                 className={cn(
                   "col-span-6 px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
                   theme.colors.primary.border,
-                  theme.colors.primary.ring
+                  theme.colors.primary.ring,
                 )}
                 value={template}
                 onChange={handleTemplateChange(name)}
@@ -130,7 +130,7 @@ export function TemplateEditor() {
                 className={cn(
                   "px-3 py-2 bg-white rounded-lg border text-sm overflow-x-auto",
                   theme.colors.primary.border,
-                  theme.colors.primary.text
+                  theme.colors.primary.text,
                 )}
               >
                 {renderTemplate(template)}
