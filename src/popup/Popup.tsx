@@ -5,7 +5,7 @@ import { useConfig } from "@/libs/contexts/config";
 import { useActiveTab } from "@/libs/hooks/tab";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
-import { getMetadata, saveMetadata } from "@/libs/utils";
+import { saveMetadata } from "@/libs/utils";
 
 function MetadataDisplay({ env }: { env: Env }) {
   const theme = useTheme();
@@ -78,9 +78,6 @@ export function Popup() {
   const [isCopied, setIsCopied] = useState(false);
   const timerId = useRef<ReturnType<typeof setTimeout>>();
   const theme = useTheme();
-  const [savedMetadata, setSavedMetadata] = useState<any[]>(
-    getMetadata("metadata")
-  );
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(copyText);
@@ -112,7 +109,6 @@ export function Popup() {
 
   const handleSaveMetadata = () => {
     saveMetadata("metadata", currentEnv);
-    setSavedMetadata(getMetadata("metadata"));
   };
 
   useEffect(() => {
