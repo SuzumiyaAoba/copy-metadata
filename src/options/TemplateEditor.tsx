@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useTheme } from "@/libs/hooks/config";
 import { useConfig } from "@/libs/contexts/config";
-import { evalTemplate, type Env } from "@/libs/template";
+import { evalTemplate } from "@/libs/template";
+import type { Env } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
 import { DefaultConfig } from "@/libs/config";

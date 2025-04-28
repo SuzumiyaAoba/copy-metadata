@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 
 export function useDebounce<T = unknown>(
   value: T,
-  condtion: (_value: T) => boolean,
+  condition: (_value: T) => boolean,
   delay: number,
 ) {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    if (condtion(value)) {
+    if (condition(value)) {
       const timeoutID = setTimeout(() => {
         setDebouncedValue(value);
       }, delay);
@@ -19,7 +19,7 @@ export function useDebounce<T = unknown>(
     } else {
       setDebouncedValue(value);
     }
-  }, [value, delay]);
+  }, [value, delay, condition]);
 
   return debouncedValue;
 }

@@ -1,35 +1,16 @@
 import { getBucket } from "@extend-chrome/storage";
 import { z } from "zod";
+import { BuiltInTemplates, Template, Templates } from "@/constants/templates";
 
 const templateSchema = z.object({
   template: z.string(),
 });
 
-export type Template = z.infer<typeof templateSchema>;
+export type { Template, Templates };
 
 const templatesSchema = z.record(templateSchema);
 
-export type Templates = z.infer<typeof templatesSchema>;
-
-export const BuiltInTemplates: Templates = {
-  URL: {
-    template: "{{{ url }}}",
-  },
-  Title: {
-    template: "{{{ title }}}",
-  },
-  Markdown: {
-    template: "[{{{ title }}}]({{{ url }}})",
-  },
-  Org: {
-    template: "[[{{{ url }}}][{{{ title }}}]]",
-  },
-  Asciidoc: {
-    template: "{{{ url }}}[{{{ title }}}]",
-  },
-};
-
-const configSchema = z.object({
+export const configSchema = z.object({
   version: z.literal(1),
   templates: z.record(z.object({ template: z.string() })),
   enabledTemplate: z.object({ name: z.string(), template: z.string() }),
@@ -43,7 +24,6 @@ export const parseConfig = async (json: unknown) => {
     return configSchema.parse(json);
   } catch (_e) {
     await setConfig(DefaultConfig);
-
     return DefaultConfig;
   }
 };
@@ -64,7 +44,6 @@ export const configBucket = getBucket(CONFIG_KEY);
 
 export async function getConfig() {
   const config = await configBucket.get();
-
   return await parseConfig(config);
 }
 
