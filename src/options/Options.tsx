@@ -4,66 +4,24 @@ import { TemplateEditor } from "./TemplateEditor";
 import { ThemeSettings } from "./ThemeSettings";
 import { useTheme } from "@/libs/hooks/config";
 import { cn } from "@/libs/utils";
-import { useState, useEffect } from "react";
-import { getMetadata } from "@/libs/utils";
-import { useConfig } from "@/libs/contexts/config";
 import { evalTemplate } from "@/libs/template";
 import { Button } from "@/components/ui/Button";
+import { useMetadataManager } from "@/options/hooks/useMetadataManager";
 
 function MetadataManager() {
-  const [metadata, setMetadata] = useState(getMetadata("metadata"));
-  const [config] = useConfig();
-  const [selectedTemplate, setSelectedTemplate] = useState(
-    config.enabledTemplate.name
-  );
-  const theme = useTheme();
-  const [formatTemplate, setFormatTemplate] = useState(
-    localStorage.getItem("formatTemplate") || "{{{url}}}"
-  );
-  const [previewText, setPreviewText] = useState("");
-
-  const handleDelete = (index: number) => {
-    const updatedMetadata = metadata.filter((_, i) => i !== index);
-    localStorage.setItem("metadata", JSON.stringify(updatedMetadata));
-    setMetadata(updatedMetadata);
-  };
-
-  const handleTemplateChange = (name: string) => {
-    setSelectedTemplate(name);
-  };
-
-  const handleCopy = async (item: any) => {
-    const formattedText =
-      evalTemplate(config.templates[selectedTemplate].template, item) ?? "";
-    await navigator.clipboard.writeText(formattedText);
-    alert("Copied to clipboard!");
-  };
-  const handleFormatAndCopyAll = () => {
-    const formattedText = metadata
-      .map((item) => evalTemplate(formatTemplate, item) ?? "")
-      .join("\n");
-    navigator.clipboard.writeText(formattedText);
-    alert("All URLs copied to clipboard!");
-  };
-
-  const updatePreview = () => {
-    const preview = metadata
-      .map((item) => evalTemplate(formatTemplate, item) ?? "")
-      .join("\n");
-    setPreviewText(preview);
-  };
-
-  const handleFormatTemplateChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newTemplate = e.target.value;
-    setFormatTemplate(newTemplate);
-    localStorage.setItem("formatTemplate", newTemplate);
-  };
-
-  useEffect(() => {
-    updatePreview();
-  }, [formatTemplate, metadata]);
+  const {
+    metadata,
+    selectedTemplate,
+    formatTemplate,
+    previewText,
+    config,
+    theme,
+    handleDelete,
+    handleTemplateChange,
+    handleCopy,
+    handleFormatAndCopyAll,
+    handleFormatTemplateChange,
+  } = useMetadataManager();
 
   return (
     <div className="space-y-4">

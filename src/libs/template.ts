@@ -1,18 +1,11 @@
 import Mustache from "mustache";
+import type { Env } from "@/types";
 
-export type Env = {
-  url: string;
-  title: string;
-};
-
-export const Templates = {
-  url: "{{{ url }}}",
-  title: "{{{ title }}}",
-  markdown: "[{{{ title }}}]({{{ url }}})",
-  org: "[[{{{ url }}}][{{{ title }}}]]",
-  asciidoc: "{{{ url }}}[{{{ title }}}]",
-};
-
+/**
+ * Create an Env object from a Chrome tab.
+ * @param tab - Chrome tab
+ * @returns Env object or undefined if url/title is missing
+ */
 export function createEnvFromTab(tab: chrome.tabs.Tab): Env | undefined {
   if (!tab.url || !tab.title) {
     return undefined;
@@ -23,6 +16,11 @@ export function createEnvFromTab(tab: chrome.tabs.Tab): Env | undefined {
   };
 }
 
+/**
+ * Create an Env object from a Document.
+ * @param document - DOM Document
+ * @returns Env object
+ */
 export function createEnvFromDocument(document: Document): Env {
   return {
     url: document.location.href,
@@ -30,6 +28,12 @@ export function createEnvFromDocument(document: Document): Env {
   };
 }
 
+/**
+ * Render a template string using Mustache and the given Env.
+ * @param template - Mustache template string
+ * @param env - Env object
+ * @returns Rendered string or undefined if error
+ */
 export function evalTemplate(template: string, env: Env): string | undefined {
   try {
     return Mustache.render(template, env);
@@ -38,6 +42,12 @@ export function evalTemplate(template: string, env: Env): string | undefined {
   }
 }
 
+/**
+ * Render a template string using Mustache and a Chrome tab.
+ * @param template - Mustache template string
+ * @param tab - Chrome tab
+ * @returns Rendered string
+ */
 export function evalTemplateInTab(
   template: string,
   tab: chrome.tabs.Tab,

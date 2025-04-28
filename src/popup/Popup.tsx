@@ -1,15 +1,10 @@
-import { useEffect, useState, useCallback, useRef } from "react";
-import { createEnvFromTab, evalTemplate, type Env } from "@/libs/template";
-import { useTheme } from "@/libs/hooks/config";
-import { useConfig } from "@/libs/contexts/config";
-import { useActiveTab } from "@/libs/hooks/tab";
+import type { Env } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
-import { saveMetadata } from "@/libs/utils";
+import { usePopupManager } from "@/popup/hooks/usePopupManager";
 
 function MetadataDisplay({ env }: { env: Env }) {
-  const theme = useTheme();
-
+  const theme = usePopupManager().theme;
   return (
     <div
       className={cn(
@@ -44,8 +39,7 @@ function MetadataDisplay({ env }: { env: Env }) {
 }
 
 function PreviewBox({ content }: { content: string }) {
-  const theme = useTheme();
-
+  const theme = usePopupManager().theme;
   return (
     <div className="relative">
       <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
@@ -68,61 +62,16 @@ function PreviewBox({ content }: { content: string }) {
 }
 
 export function Popup() {
-  const [config, updateConfig] = useConfig();
-  const [activeTab] = useActiveTab();
-  const [currentEnv, setCurrentEnv] = useState<Env>({
-    title: "",
-    url: "",
-  });
-  const [copyText, setCopyText] = useState("");
-  const [isCopied, setIsCopied] = useState(false);
-  const timerId = useRef<ReturnType<typeof setTimeout>>();
-  const theme = useTheme();
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(copyText);
-    setIsCopied(true);
-
-    if (timerId.current) {
-      clearTimeout(timerId.current);
-    }
-
-    timerId.current = setTimeout(() => {
-      setIsCopied(false);
-      window.close();
-    }, config.copyDuration);
-  };
-
-  const handleTemplateChange = (name: string) => {
-    updateConfig((draft) => {
-      draft.enabledTemplate = {
-        name,
-        template: draft.templates[name].template,
-      };
-    });
-  };
-
-  const memoizedHandleCopy = useCallback(handleCopy, [
+  const {
+    config,
+    theme,
+    currentEnv,
     copyText,
-    config.copyDuration,
-  ]);
-
-  const handleSaveMetadata = () => {
-    saveMetadata("metadata", currentEnv);
-  };
-
-  useEffect(() => {
-    if (!activeTab) return;
-    const env = createEnvFromTab(activeTab);
-    if (!env) return;
-
-    setCurrentEnv(env);
-    setCopyText(evalTemplate(config.enabledTemplate.template, env) ?? "");
-
-    if (config.copyOnIconClick) {
-      memoizedHandleCopy();
-    }
-  }, [activeTab, config, memoizedHandleCopy]);
+    isCopied,
+    handleCopy,
+    handleTemplateChange,
+    handleSaveMetadata,
+  } = usePopupManager();
 
   return (
     <div
@@ -140,15 +89,7 @@ export function Popup() {
               theme.colors.primary.ring
             )}
             value={config.enabledTemplate.name}
-            onClick={() => {
-              if (timerId.current) {
-                clearTimeout(timerId.current);
-              }
-            }}
-            onChange={(e) => {
-              const name = e.target.value;
-              handleTemplateChange(name);
-            }}
+            onChange={(e) => handleTemplateChange(e.target.value)}
           >
             {Object.entries(config.templates).map(([name]) => (
               <option key={name} value={name}>
@@ -156,11 +97,7 @@ export function Popup() {
               </option>
             ))}
           </select>
-          <Button
-            variant="primary"
-            onClick={memoizedHandleCopy}
-            className="w-30"
-          >
+          <Button variant="primary" onClick={handleCopy} className="w-30">
             {isCopied ? (
               <div className="flex items-center gap-1.5">
                 <span className="i-heroicons-check-circle-solid w-5 h-5" />
