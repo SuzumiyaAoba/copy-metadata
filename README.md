@@ -1,50 +1,85 @@
-# React + TypeScript + Vite
+# Copy Metadata ![version](https://img.shields.io/badge/version-0.1.0-blue) ![chrome-extension](https://img.shields.io/badge/chrome-extension-brightgreen)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Copy Metadata is a modern browser extension that lets you copy web page metadata (title, URL, etc.) using fully customizable templates. Designed for productivity, it features a beautiful popup UI, context menu integration, and a flexible options page.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🚀 **Copy page metadata** (title, URL, etc.) to clipboard instantly
+- 📝 **Customizable templates** for flexible output
+- 🖱️ **Context menu** integration for quick access
+- ⚙️ **Options page** to manage templates and settings
+- 🎨 **Theme customization**
+- ⚡ Built with React, TypeScript, Vite, and Tailwind CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 📦 Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/SuzumiyaAoba/copy-metadata.git
+   cd copy-metadata
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Build the extension:
+   ```sh
+   npm run build
+   ```
+4. Load the `dist/` directory as an unpacked extension in your browser (Chrome: `chrome://extensions` → Enable Developer Mode → Load unpacked).
+
+---
+
+## 🛠️ Development
+
+- Start development server with hot reload:
+  ```sh
+  npm run dev
+  ```
+- Lint and format code:
+  ```sh
+  npm run lint
+  npm run format
+  ```
+
+---
+
+## 🧩 Usage
+
+- **Popup**: Click the extension icon to open the popup and copy metadata using your templates.
+- **Context Menu**: Right-click any page to copy metadata directly.
+- **Options Page**: Click "Options" in the extension menu to manage templates, settings, and appearance.
+
+---
+
+## 📁 Project Structure
+
+See [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for full details.
+
+```
+copy-metadata/
+├── src/           # Main source code
+├── public/        # Static assets
+├── assets/        # Icons and images
+├── dist/          # Build output
+├── docs/          # Documentation
+├── manifest.json  # Extension manifest
+└── ...
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+## 📚 Documentation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+- [Specification](docs/SPECIFICATION.md)
+- [Project Structure](docs/PROJECT_STRUCTURE.md)
+
+---
+
+## 📝 License
+
+MIT
