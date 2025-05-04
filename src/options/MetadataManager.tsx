@@ -31,7 +31,7 @@ export function MetadataManager() {
         className={cn(
           "w-full px-3 py-2 text-sm rounded-lg border bg-white shadow-sm focus:ring-2 transition-shadow",
           theme.colors.primary.text,
-          theme.colors.primary.border
+          theme.colors.primary.border,
         )}
         value={selectedTemplate}
         onChange={(e) => handleTemplateChange(e.target.value)}
@@ -53,13 +53,13 @@ export function MetadataManager() {
               key={index}
               className={cn(
                 "flex justify-between items-center p-3 bg-white rounded-lg shadow-sm border",
-                theme.colors.primary.border
+                theme.colors.primary.border,
               )}
             >
               <span className={cn("text-gray-700", theme.colors.primary.text)}>
                 {evalTemplate(
                   config.templates[selectedTemplate].template,
-                  item
+                  item,
                 )}
               </span>
               <div className="flex gap-2">
@@ -67,7 +67,7 @@ export function MetadataManager() {
                   onClick={() => handleCopy(item)}
                   className={cn(
                     "hover:text-blue-800 font-medium",
-                    theme.colors.primary.text
+                    theme.colors.primary.text,
                   )}
                 >
                   Copy

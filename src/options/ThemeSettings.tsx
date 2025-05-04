@@ -1,6 +1,7 @@
 import { useConfig } from "@/libs/contexts/config";
 import { THEMES, type ThemeId } from "@/constants/themes";
 import { cn } from "@/libs/utils";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function ThemeSettings() {
   const [config, updateConfig] = useConfig();
@@ -13,11 +14,10 @@ export function ThemeSettings() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h2 className="text-xl font-bold text-gray-900">Theme Settings</h2>
-        <p className="mt-1 text-sm text-gray-500">Customize the appearance</p>
-      </div>
-
+      <SectionHeader
+        title="Theme Settings"
+        description="Customize the appearance"
+      />
       <div className="grid grid-cols-3 gap-4">
         {Object.values(THEMES).map((theme) => (
           <button

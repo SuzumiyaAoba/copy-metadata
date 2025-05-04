@@ -13,14 +13,14 @@ function Options() {
     <div
       className={cn(
         "min-h-screen bg-gradient-to-b",
-        `from-${theme.colors.primary.bg.fade} to-white`
+        `from-${theme.colors.primary.bg.fade} to-white`,
       )}
     >
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div
           className={cn(
             "bg-white/80 backdrop-blur rounded-xl shadow-sm p-8 border",
-            theme.colors.primary.border
+            theme.colors.primary.border,
           )}
         >
           <div

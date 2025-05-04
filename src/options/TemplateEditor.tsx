@@ -6,6 +6,8 @@ import type { Env } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/libs/utils";
 import { DefaultConfig } from "@/libs/config";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { LabeledInput } from "@/components/ui/LabeledInput";
 
 export function TemplateEditor() {
   const [config, updateConfig] = useConfig();
@@ -61,28 +63,27 @@ export function TemplateEditor() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <div>
-          <h2 className={cn("text-xl font-bold", theme.colors.primary.text)}>
-            Templates
-          </h2>
-          <p className={theme.colors.primary.text}>
-            Customize the format of copied text
-          </p>
-        </div>
+        <SectionHeader
+          title="Templates"
+          description="Customize the format of copied text"
+          titleClassName={theme.colors.primary.text}
+          descriptionClassName={theme.colors.primary.text}
+        />
         <Button variant="secondary" onClick={handleResetToDefault}>
           Reset to Default
         </Button>
       </div>
 
       <form onSubmit={handleAddTemplate} className="flex gap-3">
-        <input
+        <LabeledInput
+          label="New template name"
+          value={newTemplateName}
+          onChange={(e) => setNewTemplateName(e.target.value)}
           className={cn(
-            "flex-grow px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+            "flex-grow",
             theme.colors.primary.border,
             theme.colors.primary.ring,
           )}
-          value={newTemplateName}
-          onChange={(e) => setNewTemplateName(e.target.value)}
           placeholder="New template name"
         />
         <Button type="submit" variant="primary">
@@ -109,14 +110,15 @@ export function TemplateEditor() {
               >
                 {name}
               </label>
-              <input
+              <LabeledInput
+                label=""
+                value={template}
+                onChange={handleTemplateChange(name)}
                 className={cn(
-                  "col-span-6 px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+                  "col-span-6",
                   theme.colors.primary.border,
                   theme.colors.primary.ring,
                 )}
-                value={template}
-                onChange={handleTemplateChange(name)}
               />
               <Button
                 variant="danger"

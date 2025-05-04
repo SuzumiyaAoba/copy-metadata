@@ -1,6 +1,7 @@
 import { getBucket } from "@extend-chrome/storage";
 import { z } from "zod";
 import { BuiltInTemplates, Template, Templates } from "@/constants/templates";
+import type { AppConfig } from "@/types";
 
 const templateSchema = z.object({
   template: z.string(),
@@ -28,7 +29,7 @@ export const parseConfig = async (json: unknown) => {
   }
 };
 
-export type Config = z.infer<typeof configSchema>;
+export type Config = AppConfig;
 
 export const DefaultConfig: Config = {
   version: 1,

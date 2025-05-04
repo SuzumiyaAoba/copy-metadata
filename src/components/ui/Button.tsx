@@ -40,7 +40,7 @@ export function Button({
         variant === "danger" && "focus:ring-red-500",
         variantStyles[variant],
         sizeStyles[size],
-        className
+        className,
       )}
       {...props}
     />

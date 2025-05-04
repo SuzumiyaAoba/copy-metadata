@@ -1,0 +1,29 @@
+import { cn } from "@/libs/utils";
+import type { ComponentPropsWithoutRef } from "react";
+
+interface LabeledInputProps extends ComponentPropsWithoutRef<"input"> {
+  label: string;
+  labelClassName?: string;
+  containerClassName?: string;
+}
+
+export function LabeledInput({
+  label,
+  labelClassName,
+  containerClassName,
+  className,
+  ...props
+}: LabeledInputProps) {
+  return (
+    <div className={cn("flex items-center space-x-3", containerClassName)}>
+      <label className={cn("font-medium", labelClassName)}>{label}</label>
+      <input
+        className={cn(
+          "px-3 py-2 rounded-lg border shadow-sm focus:ring-2 transition-shadow",
+          className,
+        )}
+        {...props}
+      />
+    </div>
+  );
+}

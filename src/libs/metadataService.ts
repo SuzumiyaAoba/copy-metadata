@@ -1,12 +1,12 @@
-import type { Env as Metadata } from "@/types";
+import type { Env } from "@/types";
 
 /**
- * Save a metadata entry to localStorage under the given key.
+ * Save a single metadata entry to localStorage under the given key (append).
  * @param key - Storage key
  * @param data - Metadata object to save
  */
-export function saveMetadata(key: string, data: Metadata): void {
-  const existingData: Metadata[] = getMetadata(key);
+export function saveMetadataToStorage(key: string, data: Env): void {
+  const existingData: Env[] = getMetadataFromStorage(key);
   localStorage.setItem(key, JSON.stringify([...existingData, data]));
 }
 
@@ -15,7 +15,7 @@ export function saveMetadata(key: string, data: Metadata): void {
  * @param key - Storage key
  * @returns Array of metadata objects
  */
-export function getMetadata(key: string): Metadata[] {
+export function getMetadataFromStorage(key: string): Env[] {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return [];
@@ -38,7 +38,7 @@ export function getMetadata(key: string): Metadata[] {
  * @param template - Template string (e.g. "{{title}} - {{url}}")
  * @returns Formatted string
  */
-export function formatMetadata(data: Metadata[], template: string): string {
+export function formatMetadata(data: Env[], template: string): string {
   return data
     .map((item) => {
       let formatted: string = template;
@@ -51,4 +51,13 @@ export function formatMetadata(data: Metadata[], template: string): string {
       return formatted;
     })
     .join("\n");
+}
+
+/**
+ * Save all metadata entries to localStorage under the given key (overwrite).
+ * @param key - Storage key
+ * @param data - Array of metadata objects to save
+ */
+export function setMetadataToStorage(key: string, data: Env[]): void {
+  localStorage.setItem(key, JSON.stringify(data));
 }

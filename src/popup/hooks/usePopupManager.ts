@@ -10,7 +10,7 @@ import type { Env } from "@/types";
 import { useTheme } from "@/libs/hooks/config";
 import { useConfig } from "@/libs/contexts/config";
 import { useActiveTab } from "@/libs/hooks/tab";
-import { saveMetadata } from "@/libs/metadataService";
+import { saveMetadataToStorage } from "@/libs/metadataService";
 
 export function usePopupManager() {
   const [config, updateConfig] = useConfig();
@@ -57,7 +57,7 @@ export function usePopupManager() {
    * Save the current metadata (Env) to localStorage.
    */
   const handleSaveMetadata = () => {
-    saveMetadata("metadata", currentEnv);
+    saveMetadataToStorage("metadata", currentEnv);
   };
 
   useEffect(() => {
