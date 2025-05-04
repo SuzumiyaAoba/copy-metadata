@@ -34,9 +34,8 @@ export function ConfigProvider({ children }: PropsWithChildren) {
       value={[
         config,
         (updator) => {
-          const value = typeof updator === "function"
-            ? produce(updator)(config)
-            : updator;
+          const value =
+            typeof updator === "function" ? produce(updator)(config) : updator;
 
           updateConfig(value);
           setConfig(value);
