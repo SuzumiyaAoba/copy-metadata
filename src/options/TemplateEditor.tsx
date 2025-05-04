@@ -3,7 +3,6 @@ import { useConfig } from "@/libs/contexts/config";
 import { evalTemplate } from "@/libs/template";
 import type { Env } from "@/types";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/libs/utils";
 import { DefaultConfig } from "@/libs/config";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { LabeledInput } from "@/components/ui/LabeledInput";
@@ -42,7 +41,7 @@ export function TemplateEditor() {
   const handleResetToDefault = () => {
     if (
       !window.confirm(
-        "Are you sure you want to reset all templates to default?",
+        "Are you sure you want to reset all templates to default?"
       )
     )
       return;
