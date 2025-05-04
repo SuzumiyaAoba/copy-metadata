@@ -4,7 +4,7 @@
  *
  * @returns Popup UI state and handlers
  */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { createEnvFromTab, evalTemplate } from "@/libs/template";
 import type { Env } from "@/types";
 import { useTheme } from "@/libs/hooks/config";
