@@ -23,12 +23,15 @@ export function useImmerStorage<S = unknown>(
 
   return [
     val,
-    useCallback((updater) => {
-      if (typeof updater === "function") {
-        updateValue(produce(updater as (_draft: Draft<S>) => void));
-      } else {
-        updateValue(freeze(updater));
-      }
-    }, []),
+    useCallback(
+      (updater) => {
+        if (typeof updater === "function") {
+          updateValue(produce(updater as (_draft: Draft<S>) => void));
+        } else {
+          updateValue(freeze(updater));
+        }
+      },
+      [updateValue],
+    ),
   ];
 }
