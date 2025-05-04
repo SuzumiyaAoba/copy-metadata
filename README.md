@@ -1,6 +1,9 @@
 # Copy Metadata ![version](https://img.shields.io/badge/version-0.1.0-blue) ![chrome-extension](https://img.shields.io/badge/chrome-extension-brightgreen)
 
-Copy Metadata is a modern browser extension that lets you copy web page metadata (title, URL, etc.) using fully customizable templates. Designed for productivity, it features a beautiful popup UI, context menu integration, and a flexible options page.
+Copy Metadata is a modern browser extension that lets you copy web page metadata
+(title, URL, etc.) using fully customizable templates. Designed for
+productivity, it features a beautiful popup UI, context menu integration, and a
+flexible options page.
 
 ---
 
@@ -30,7 +33,8 @@ Copy Metadata is a modern browser extension that lets you copy web page metadata
    ```sh
    npm run build
    ```
-4. Load the `dist/` directory as an unpacked extension in your browser (Chrome: `chrome://extensions` → Enable Developer Mode → Load unpacked).
+4. Load the `dist/` directory as an unpacked extension in your browser (Chrome:
+   `chrome://extensions` → Enable Developer Mode → Load unpacked).
 
 ---
 
@@ -50,9 +54,11 @@ Copy Metadata is a modern browser extension that lets you copy web page metadata
 
 ## 🧩 Usage
 
-- **Popup**: Click the extension icon to open the popup and copy metadata using your templates.
+- **Popup**: Click the extension icon to open the popup and copy metadata using
+  your templates.
 - **Context Menu**: Right-click any page to copy metadata directly.
-- **Options Page**: Click "Options" in the extension menu to manage templates, settings, and appearance.
+- **Options Page**: Click "Options" in the extension menu to manage templates,
+  settings, and appearance.
 
 ---
 

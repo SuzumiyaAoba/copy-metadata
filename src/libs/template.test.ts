@@ -1,5 +1,5 @@
 // jest-environment-jsdom
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createEnvFromTab, evalTemplate, evalTemplateInTab } from "./template";
 import type { Env } from "@/types";
 

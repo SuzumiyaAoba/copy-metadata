@@ -1,4 +1,4 @@
-import { createContext, useContext, type PropsWithChildren } from "react";
+import { createContext, type PropsWithChildren, useContext } from "react";
 import { useImmer } from "use-immer";
 import {
   type Config,
@@ -34,8 +34,9 @@ export function ConfigProvider({ children }: PropsWithChildren) {
       value={[
         config,
         (updator) => {
-          const value =
-            typeof updator === "function" ? produce(updator)(config) : updator;
+          const value = typeof updator === "function"
+            ? produce(updator)(config)
+            : updator;
 
           updateConfig(value);
           setConfig(value);

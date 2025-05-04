@@ -47,47 +47,53 @@ function MetadataManager() {
           </option>
         ))}
       </select>
-      {metadata.length === 0 ? (
-        <p className={cn("text-gray-600", theme.colors.primary.text)}>
-          No metadata saved.
-        </p>
-      ) : (
-        <ul className="space-y-2">
-          {metadata.map((item, index) => (
-            <li
-              key={index}
-              className={cn(
-                "flex justify-between items-center p-3 bg-white rounded-lg shadow-sm border",
-                theme.colors.primary.border,
-              )}
-            >
-              <span className={cn("text-gray-700", theme.colors.primary.text)}>
-                {evalTemplate(
-                  config.templates[selectedTemplate].template,
-                  item,
+      {metadata.length === 0
+        ? (
+          <p className={cn("text-gray-600", theme.colors.primary.text)}>
+            No metadata saved.
+          </p>
+        )
+        : (
+          <ul className="space-y-2">
+            {metadata.map((item, index) => (
+              <li
+                key={index}
+                className={cn(
+                  "flex justify-between items-center p-3 bg-white rounded-lg shadow-sm border",
+                  theme.colors.primary.border,
                 )}
-              </span>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleCopy(item)}
-                  className={cn(
-                    "hover:text-blue-800 font-medium",
-                    theme.colors.primary.text,
+              >
+                <span
+                  className={cn("text-gray-700", theme.colors.primary.text)}
+                >
+                  {evalTemplate(
+                    config.templates[selectedTemplate].template,
+                    item,
                   )}
-                >
-                  Copy
-                </button>
-                <button
-                  onClick={() => handleDelete(index)}
-                  className={cn("text-red-600 hover:text-red-800 font-medium")}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleCopy(item)}
+                    className={cn(
+                      "hover:text-blue-800 font-medium",
+                      theme.colors.primary.text,
+                    )}
+                  >
+                    Copy
+                  </button>
+                  <button
+                    onClick={() => handleDelete(index)}
+                    className={cn(
+                      "text-red-600 hover:text-red-800 font-medium",
+                    )}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       <div className="mt-6">
         <h3 className={cn("text-lg font-semibold", theme.colors.primary.text)}>
           Format Template

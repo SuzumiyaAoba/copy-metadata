@@ -98,14 +98,16 @@ export function Popup() {
             ))}
           </select>
           <Button variant="primary" onClick={handleCopy} className="w-30">
-            {isCopied ? (
-              <div className="flex items-center gap-1.5">
-                <span className="i-heroicons-check-circle-solid w-5 h-5" />
-                Copied!
-              </div>
-            ) : (
-              "Copy"
-            )}
+            {isCopied
+              ? (
+                <div className="flex items-center gap-1.5">
+                  <span className="i-heroicons-check-circle-solid w-5 h-5" />
+                  Copied!
+                </div>
+              )
+              : (
+                "Copy"
+              )}
           </Button>
         </div>
 

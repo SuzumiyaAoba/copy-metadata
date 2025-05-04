@@ -2,7 +2,9 @@
 
 ## Overview
 
-"Copy metadata" is a browser extension that allows users to copy web page metadata using customizable templates. The extension provides a popup UI, an options/settings page, and context menu integration for enhanced usability.
+"Copy metadata" is a browser extension that allows users to copy web page
+metadata using customizable templates. The extension provides a popup UI, an
+options/settings page, and context menu integration for enhanced usability.
 
 ## Main Features
 

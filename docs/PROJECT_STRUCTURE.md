@@ -1,6 +1,7 @@
 # Project Structure
 
-This document describes the directory structure and the purpose of each main directory and file in this project.
+This document describes the directory structure and the purpose of each main
+directory and file in this project.
 
 ## Root Level
 

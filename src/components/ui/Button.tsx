@@ -25,8 +25,10 @@ export function Button({
   const theme = THEMES[config.theme];
 
   const variantStyles: Record<ButtonVariant, string> = {
-    primary: `${theme.colors.primary.base} text-white ${theme.colors.primary.hover} ${theme.colors.primary.active}`,
-    secondary: `border ${theme.colors.primary.border} ${theme.colors.primary.text} hover:text-purple-800 ${theme.colors.primary.bg.light}`,
+    primary:
+      `${theme.colors.primary.base} text-white ${theme.colors.primary.hover} ${theme.colors.primary.active}`,
+    secondary:
+      `border ${theme.colors.primary.border} ${theme.colors.primary.text} hover:text-purple-800 ${theme.colors.primary.bg.light}`,
     danger: "text-red-500 hover:text-red-600 hover:bg-red-50",
     ghost: `${theme.colors.primary.text} hover:bg-gray-100`,
   };

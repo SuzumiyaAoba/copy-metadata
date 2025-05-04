@@ -1,5 +1,5 @@
 import { useStorage } from "@plasmohq/storage/hook";
-import { freeze, produce, type Draft } from "immer";
+import { type Draft, freeze, produce } from "immer";
 import { useCallback } from "react";
 
 export type DraftFunction<S> = (_draft: Draft<S>) => void;

@@ -4,7 +4,7 @@
  *
  * @returns Options UI state and handlers for metadata management
  */
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useConfig } from "@/libs/contexts/config";
 import { useTheme } from "@/libs/hooks/config";
 import { getMetadata } from "@/libs/metadataService";

@@ -1,5 +1,5 @@
 import { useConfig } from "@/libs/contexts/config";
-import { THEMES, type ThemeId } from "@/constants/themes";
+import { type ThemeId, THEMES } from "@/constants/themes";
 import { cn } from "@/libs/utils";
 
 export function ThemeSettings() {
