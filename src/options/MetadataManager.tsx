@@ -20,19 +20,13 @@ export function MetadataManager() {
 
   return (
     <div className="space-y-4">
-      <h2 className={cn("text-2xl font-semibold", theme.colors.primary.text)}>
-        Saved Metadata
-      </h2>
-      <p className={cn("text-sm text-gray-600", theme.colors.primary.text)}>
+      <h2 className="text-2xl font-semibold text-white">Saved Metadata</h2>
+      <p className="text-sm text-gray-300">
         Use Mustache syntax for templates. Example:
         &#123;&#123;&#123;url&#125;&#125;&#125;
       </p>
       <select
-        className={cn(
-          "w-full px-3 py-2 text-sm rounded-lg border bg-white shadow-sm focus:ring-2 transition-shadow",
-          theme.colors.primary.text,
-          theme.colors.primary.border,
-        )}
+        className="w-full px-3 py-2 text-sm rounded-lg border border-gray-600 bg-gray-800 text-gray-100 shadow-sm focus:ring-2 focus:ring-gray-500 transition-shadow"
         value={selectedTemplate}
         onChange={(e) => handleTemplateChange(e.target.value)}
       >
@@ -43,20 +37,15 @@ export function MetadataManager() {
         ))}
       </select>
       {metadata.length === 0 ? (
-        <p className={cn("text-gray-600", theme.colors.primary.text)}>
-          No metadata saved.
-        </p>
+        <p className="text-gray-400">No metadata saved.</p>
       ) : (
         <ul className="space-y-2">
           {metadata.map((item, index) => (
             <li
               key={index}
-              className={cn(
-                "flex justify-between items-center p-3 bg-white rounded-lg shadow-sm border",
-                theme.colors.primary.border,
-              )}
+              className="flex justify-between items-center p-3 bg-gray-900 rounded-lg shadow-sm border border-gray-700"
             >
-              <span className={cn("text-gray-700", theme.colors.primary.text)}>
+              <span className="text-gray-100">
                 {evalTemplate(
                   config.templates[selectedTemplate].template,
                   item,
@@ -65,16 +54,13 @@ export function MetadataManager() {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleCopy(item)}
-                  className={cn(
-                    "hover:text-blue-800 font-medium",
-                    theme.colors.primary.text,
-                  )}
+                  className="hover:text-purple-400 font-medium text-gray-200"
                 >
                   Copy
                 </button>
                 <button
                   onClick={() => handleDelete(index)}
-                  className={cn("text-red-600 hover:text-red-800 font-medium")}
+                  className="text-red-400 hover:text-red-300 font-medium"
                 >
                   Delete
                 </button>
@@ -84,30 +70,24 @@ export function MetadataManager() {
         </ul>
       )}
       <div className="mt-6">
-        <h3 className={cn("text-lg font-semibold", theme.colors.primary.text)}>
-          Format Template
-        </h3>
+        <h3 className="text-lg font-semibold text-white">Format Template</h3>
         <input
           type="text"
           value={formatTemplate}
           onChange={handleFormatTemplateChange}
           placeholder="Enter format template"
-          className="w-full px-3 py-2 text-sm rounded-lg border bg-white/90 shadow-sm focus:ring-2 transition-shadow text-gray-900"
+          className="w-full px-3 py-2 text-sm rounded-lg border border-gray-600 bg-gray-800 text-gray-100 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-gray-500 transition-shadow"
         />
         <div className="mt-4">
-          <h3
-            className={cn("text-lg font-semibold", theme.colors.primary.text)}
-          >
-            Preview
-          </h3>
-          <pre className="bg-gray-100 p-2 rounded-lg text-sm overflow-x-auto">
+          <h3 className="text-lg font-semibold text-purple-400">Preview</h3>
+          <pre className="bg-gray-800 p-2 rounded-lg text-sm overflow-x-auto text-gray-100 border border-gray-700">
             {previewText}
           </pre>
         </div>
         <Button
           variant="primary"
           onClick={handleFormatAndCopyAll}
-          className="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="w-full mt-4 font-bold py-2 px-4 rounded"
         >
           Copy All Formatted URLs
         </Button>

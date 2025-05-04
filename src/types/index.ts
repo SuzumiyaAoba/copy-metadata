@@ -22,7 +22,7 @@ export type Templates = Record<string, Template>;
 /**
  * Theme definition.
  */
-export type Theme = "purple" | "blue" | "emerald";
+export type Theme = "purple" | "blue";
 
 /**
  * App configuration.

@@ -4,28 +4,17 @@ import { cn } from "@/libs/utils";
 import { usePopupManager } from "@/popup/hooks/usePopupManager";
 
 function MetadataDisplay({ env }: { env: Env }) {
-  const theme = usePopupManager().theme;
   return (
-    <div
-      className={cn(
-        "space-y-2.5 rounded-lg p-3.5 border bg-white/80",
-        theme.colors.primary.bg.light,
-        theme.colors.primary.border,
-      )}
-    >
+    <div className="space-y-2.5 rounded-lg p-3.5 border border-gray-700 bg-gray-900">
       {Object.entries(env).map(([key, value]) => (
         <div key={key} className="flex">
-          <span
-            className={cn(
-              "text-xs font-medium w-12 text-right pr-2.5 pt-0.5 text-gray-500",
-            )}
-          >
+          <span className="text-xs font-medium w-12 text-right pr-2.5 pt-0.5 text-gray-400">
             {key.charAt(0).toUpperCase() + key.slice(1)}
           </span>
           <div className="flex-1 min-w-0">
             <p
               className={cn(
-                "text-sm font-medium leading-relaxed text-gray-900",
+                "text-sm font-medium leading-relaxed text-gray-100",
                 key === "url" ? "font-mono break-all" : "break-words",
               )}
             >
@@ -39,22 +28,12 @@ function MetadataDisplay({ env }: { env: Env }) {
 }
 
 function PreviewBox({ content }: { content: string }) {
-  const theme = usePopupManager().theme;
   return (
     <div className="relative">
-      <div className="absolute -top-2.5 left-3 px-1.5 bg-white">
-        <span className={cn("text-xs font-medium", theme.colors.primary.text)}>
-          Preview
-        </span>
+      <div className="absolute -top-2.5 left-3 px-1.5 bg-gray-900">
+        <span className="text-xs font-medium text-purple-400">Preview</span>
       </div>
-      <div
-        className={cn(
-          "px-3.5 py-2.5 text-sm font-medium border rounded-lg overflow-x-auto whitespace-nowrap font-mono shadow-sm bg-white/90",
-          theme.colors.primary.border,
-          "text-gray-900",
-          theme.colors.primary.bg.fade,
-        )}
-      >
+      <div className="px-3.5 py-2.5 text-sm font-medium border border-gray-700 rounded-lg overflow-x-auto whitespace-pre font-mono shadow-sm bg-gray-800 text-gray-100">
         {content}
       </div>
     </div>
@@ -64,7 +43,6 @@ function PreviewBox({ content }: { content: string }) {
 export function Popup() {
   const {
     config,
-    theme,
     currentEnv,
     copyText,
     isCopied,
@@ -74,20 +52,11 @@ export function Popup() {
   } = usePopupManager();
 
   return (
-    <div
-      className={cn(
-        "w-96 bg-gradient-to-b backdrop-blur",
-        `from-${theme.colors.primary.bg.fade}`,
-      )}
-    >
+    <div className="w-96 bg-gradient-to-b from-gray-900 to-gray-800 backdrop-blur text-gray-100">
       <div className="p-4 space-y-4">
         <div className="flex gap-2">
           <select
-            className={cn(
-              "flex-grow px-3 py-2 text-sm rounded-lg border bg-white/90 shadow-sm focus:ring-2 transition-shadow text-gray-900",
-              theme.colors.primary.border,
-              theme.colors.primary.ring,
-            )}
+            className="flex-grow px-3 py-2 text-sm rounded-lg border border-gray-700 bg-gray-900 text-gray-100 shadow-sm focus:ring-2 focus:ring-gray-500 transition-shadow"
             value={config.enabledTemplate.name}
             onChange={(e) => handleTemplateChange(e.target.value)}
           >
