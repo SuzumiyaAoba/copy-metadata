@@ -1,4 +1,3 @@
-import { cn } from "@/libs/utils";
 import { evalTemplate } from "@/libs/template";
 import { Button } from "@/components/ui/Button";
 import { useMetadataManager } from "@/options/hooks/useMetadataManager";
@@ -10,7 +9,6 @@ export function MetadataManager() {
     formatTemplate,
     previewText,
     config,
-    theme,
     handleDelete,
     handleTemplateChange,
     handleCopy,
@@ -48,7 +46,7 @@ export function MetadataManager() {
               <span className="text-gray-100">
                 {evalTemplate(
                   config.templates[selectedTemplate].template,
-                  item,
+                  item
                 )}
               </span>
               <div className="flex gap-2">
