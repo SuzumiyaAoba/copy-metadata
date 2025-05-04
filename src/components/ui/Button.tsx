@@ -10,7 +10,7 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   size?: "sm" | "md";
 }
 
-const sizeStyles = {
+const sizeStyles: Record<NonNullable<ButtonProps["size"]>, string> = {
   sm: "px-3 py-1.5 text-xs",
   md: "px-4 py-2 text-sm",
 };
@@ -40,7 +40,7 @@ export function Button({
         variant === "danger" && "focus:ring-red-500",
         variantStyles[variant],
         sizeStyles[size],
-        className,
+        className
       )}
       {...props}
     />
