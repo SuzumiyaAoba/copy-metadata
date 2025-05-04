@@ -3,7 +3,7 @@ import { evalTemplate } from "@/libs/template";
 import { Button } from "@/components/ui/Button";
 import { useMetadataManager } from "@/options/hooks/useMetadataManager";
 
-function MetadataManager() {
+export function MetadataManager() {
   const {
     metadata,
     selectedTemplate,
@@ -115,5 +115,3 @@ function MetadataManager() {
     </div>
   );
 }
-
-export default MetadataManager;
