@@ -43,7 +43,7 @@ export function TemplateEditor() {
   const handleResetToDefault = () => {
     if (
       !window.confirm(
-        "Are you sure you want to reset all templates to default?",
+        "Are you sure you want to reset all templates to default?"
       )
     )
       return;
@@ -82,7 +82,7 @@ export function TemplateEditor() {
           className={cn(
             "flex-grow",
             theme.colors.primary.border,
-            theme.colors.primary.ring,
+            theme.colors.primary.ring
           )}
           placeholder="New template name"
         />
@@ -98,14 +98,14 @@ export function TemplateEditor() {
             className={cn(
               "rounded-lg p-4 space-y-3 border",
               theme.colors.primary.bg.light,
-              theme.colors.primary.border,
+              theme.colors.primary.border
             )}
           >
-            <div className="grid grid-cols-8 gap-3 items-center">
+            <div className="flex items-center gap-3 w-full">
               <label
                 className={cn(
-                  "col-span-1 text-right font-medium",
-                  theme.colors.primary.text,
+                  "w-16 text-right font-medium flex-none",
+                  theme.colors.primary.text
                 )}
               >
                 {name}
@@ -115,25 +115,25 @@ export function TemplateEditor() {
                 value={template}
                 onChange={handleTemplateChange(name)}
                 className={cn(
-                  "col-span-6",
+                  "grow basis-0 w-full",
                   theme.colors.primary.border,
-                  theme.colors.primary.ring,
+                  theme.colors.primary.ring
                 )}
               />
               <Button
                 variant="danger"
-                className="col-span-1"
+                className="ml-2 flex-none"
                 onClick={() => handleDeleteTemplate(name)}
               >
                 Delete
               </Button>
             </div>
-            <div className="ml-[12.5%] w-[75%]">
+            <div className="w-full">
               <div
                 className={cn(
                   "px-3 py-2 bg-white rounded-lg border text-sm overflow-x-auto",
                   theme.colors.primary.border,
-                  theme.colors.primary.text,
+                  theme.colors.primary.text
                 )}
               >
                 {renderTemplate(template)}
