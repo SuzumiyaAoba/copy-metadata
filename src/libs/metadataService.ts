@@ -7,8 +7,7 @@ import type { Env as Metadata } from "@/types";
  */
 export function saveMetadata(key: string, data: Metadata): void {
   const existingData: Metadata[] = getMetadata(key);
-  existingData.push(data);
-  localStorage.setItem(key, JSON.stringify(existingData));
+  localStorage.setItem(key, JSON.stringify([...existingData, data]));
 }
 
 /**

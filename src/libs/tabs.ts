@@ -3,6 +3,7 @@ export async function activeTabCallback(
 ): Promise<void> {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const activeTab = tabs[0];
-
-  await callback(activeTab);
+  if (activeTab) {
+    await callback(activeTab);
+  }
 }

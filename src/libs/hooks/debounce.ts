@@ -4,7 +4,7 @@ export function useDebounce<T = unknown>(
   value: T,
   condition: (_value: T) => boolean,
   delay: number,
-) {
+): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ export function useActiveTab() {
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-      setTab(tabs[0]);
+      setTab(tabs[0] ?? null);
     });
   }, []);
 

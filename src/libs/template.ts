@@ -52,5 +52,6 @@ export function evalTemplateInTab(
   template: string,
   tab: chrome.tabs.Tab,
 ): string {
-  return Mustache.render(template, createEnvFromTab(tab));
+  const env = createEnvFromTab(tab);
+  return env ? Mustache.render(template, env) : "";
 }
