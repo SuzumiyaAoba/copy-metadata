@@ -7,12 +7,15 @@
 import { useState, useEffect } from "react";
 import { useConfig } from "@/libs/contexts/config";
 import { useTheme } from "@/libs/hooks/config";
-import { getMetadata } from "@/libs/metadataService";
+import {
+  getMetadataFromStorage,
+  setMetadataToStorage,
+} from "@/libs/metadataService";
 import { evalTemplate } from "@/libs/template";
 import type { Env } from "@/types";
 
 export function useMetadataManager() {
-  const [metadata, setMetadata] = useState(getMetadata("metadata"));
+  const [metadata, setMetadata] = useState(getMetadataFromStorage("metadata"));
   const [config] = useConfig();
   const [selectedTemplate, setSelectedTemplate] = useState(
     config.enabledTemplate.name,
@@ -28,7 +31,7 @@ export function useMetadataManager() {
    */
   const handleDelete = (index: number) => {
     const updatedMetadata = metadata.filter((_, i) => i !== index);
-    localStorage.setItem("metadata", JSON.stringify(updatedMetadata));
+    setMetadataToStorage("metadata", updatedMetadata);
     setMetadata(updatedMetadata);
   };
 

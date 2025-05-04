@@ -1,7 +1,5 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { cn } from "@/libs/utils";
-import { useConfig } from "@/libs/contexts/config";
-import { THEMES } from "@/constants/themes";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
 
@@ -21,26 +19,23 @@ export function Button({
   className,
   ...props
 }: ButtonProps) {
-  const [config] = useConfig();
-  const theme = THEMES[config.theme];
-
   const variantStyles: Record<ButtonVariant, string> = {
-    primary: `${theme.colors.primary.base} text-white ${theme.colors.primary.hover} ${theme.colors.primary.active}`,
-    secondary: `border ${theme.colors.primary.border} ${theme.colors.primary.text} hover:text-purple-800 ${theme.colors.primary.bg.light}`,
-    danger: "text-red-500 hover:text-red-600 hover:bg-red-50",
-    ghost: `${theme.colors.primary.text} hover:bg-gray-100`,
+    primary:
+      "bg-gray-700 text-white hover:bg-gray-600 active:bg-gray-800 border border-gray-600",
+    secondary:
+      "border border-gray-600 text-gray-200 bg-gray-700 hover:bg-gray-600",
+    danger:
+      "text-red-400 hover:text-red-300 hover:bg-gray-800 border border-gray-700",
+    ghost: "text-gray-200 hover:bg-gray-800",
   };
 
   return (
     <button
       className={cn(
-        "font-medium rounded-lg transition-colors focus:outline-none focus:ring-2",
-        variant === "primary" && theme.colors.primary.ring,
-        variant === "secondary" && theme.colors.primary.ring,
-        variant === "danger" && "focus:ring-red-500",
+        "font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500",
         variantStyles[variant],
         sizeStyles[size],
-        className
+        className,
       )}
       {...props}
     />

@@ -1,5 +1,5 @@
 import Mustache from "mustache";
-import type { Env } from "@/types";
+import type { Env, Template } from "@/types";
 
 /**
  * Create an Env object from a Chrome tab.
@@ -34,7 +34,10 @@ export function createEnvFromDocument(document: Document): Env {
  * @param env - Env object
  * @returns Rendered string or undefined if error
  */
-export function evalTemplate(template: string, env: Env): string | undefined {
+export function evalTemplate(
+  template: Template["template"] | string,
+  env: Env,
+): string | undefined {
   try {
     return Mustache.render(template, env);
   } catch (_e) {
@@ -49,7 +52,7 @@ export function evalTemplate(template: string, env: Env): string | undefined {
  * @returns Rendered string
  */
 export function evalTemplateInTab(
-  template: string,
+  template: Template["template"] | string,
   tab: chrome.tabs.Tab,
 ): string {
   const env = createEnvFromTab(tab);

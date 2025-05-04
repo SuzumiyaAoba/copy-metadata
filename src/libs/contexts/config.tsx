@@ -1,26 +1,23 @@
 import { createContext, useContext, type PropsWithChildren } from "react";
 import { useImmer } from "use-immer";
-import {
-  type Config,
-  DefaultConfig,
-  getConfig,
-  setConfig,
-} from "@/libs/config";
+import { DefaultConfig, getConfig, setConfig } from "@/libs/config";
 import { useEffect } from "react";
 import { produce } from "immer";
+import type { AppConfig } from "@/types";
 
+type ConfigUpdater = (draft: AppConfig) => void | AppConfig;
 type ConfigContextType = readonly [
-  Config,
-  (_updator: (_draft: Config) => void | Config) => void,
+  AppConfig,
+  (updator: ConfigUpdater | AppConfig) => void,
 ];
 
 const ConfigContext = createContext<ConfigContextType | null>(null);
 
 export function ConfigProvider({ children }: PropsWithChildren) {
-  const [config, updateConfig] = useImmer(DefaultConfig);
+  const [config, updateConfig] = useImmer<AppConfig>(DefaultConfig);
 
   useEffect(() => {
-    getConfig().then((config) => {
+    getConfig().then((config: AppConfig) => {
       try {
         updateConfig(config);
       } catch (_e) {
@@ -35,7 +32,9 @@ export function ConfigProvider({ children }: PropsWithChildren) {
         config,
         (updator) => {
           const value =
-            typeof updator === "function" ? produce(updator)(config) : updator;
+            typeof updator === "function"
+              ? (produce(updator)(config) as AppConfig)
+              : (updator as AppConfig);
 
           updateConfig(value);
           setConfig(value);

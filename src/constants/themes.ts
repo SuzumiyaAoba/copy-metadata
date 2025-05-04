@@ -37,25 +37,6 @@ export const THEMES = {
       },
     },
   },
-  emerald: {
-    id: "emerald",
-    name: "Emerald",
-    primary: "emerald",
-    colors: {
-      primary: {
-        base: "bg-emerald-600",
-        hover: "hover:bg-emerald-700",
-        active: "active:bg-emerald-800",
-        text: "text-emerald-600",
-        border: "border-emerald-200",
-        ring: "focus:ring-emerald-500",
-        bg: {
-          light: "bg-emerald-50",
-          fade: "bg-emerald-50/50",
-        },
-      },
-    },
-  },
 } as const;
 
 export type ThemeId = keyof typeof THEMES;
